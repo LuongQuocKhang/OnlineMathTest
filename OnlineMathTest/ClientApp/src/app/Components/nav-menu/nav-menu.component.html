@@ -1,0 +1,51 @@
+<header>
+  <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>
+    <div class="container">
+      <a class="navbar-brand title"
+         [routerLink]='["/"]'
+         style="font-size: 25px;">
+        Thi toán Online
+      </a>
+      <button class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target=".navbar-collapse"
+              aria-label="Toggle navigation"
+              [attr.aria-expanded]="isExpanded"
+              (click)="toggle()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <form action=""
+            style="width: 50%;
+                   margin-left: 25px;">
+        <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4"
+             style="margin-bottom: 0px !important;">
+          <div class="input-group">
+            <input type="search" placeholder="Tìm kiếm" aria-describedby="button-addon1" class="form-control border-0 bg-light">
+            <div class="input-group-append">
+              <button id="button-addon1" type="submit" class="btn btn-link text-primary">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
+           [ngClass]='{"show": isExpanded}'
+           style="margin-top:5px;">
+        <ul class="navbar-nav flex-grow">
+          <li class="nav-item" [routerLinkActive]='["link-active"]'>
+            <a class="nav-link-padding text-dark nav-menu-font-size"
+               [routerLink]='["/MCQ"]'
+               style="font-size: 18px;margin-right: 10px;">Danh sách đề thi</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]'>
+            <a class="nav-link-padding text-dark nav-menu-font-size"
+               [routerLink]='["/login"]'
+               style="font-size: 18px;">Đăng nhập</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

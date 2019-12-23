@@ -5,6 +5,18 @@ VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMathTest", "OnlineMathTest\OnlineMathTest.csproj", "{0336919F-AC35-4730-9279-2C6613947F5A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMathTest.Model", "OnlineMathTest.Model\OnlineMathTest.Model.csproj", "{4A8E7CBE-EFEF-4996-86C0-F0EE5BB90E0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMathTest.ViewModel", "OnlineMathTest.ViewModel\OnlineMathTest.ViewModel.csproj", "{4551201D-8523-4C3E-B954-8A6C83922E8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMathTest.Context", "OnlineMathTest.Context\OnlineMathTest.Context.csproj", "{AFB44CF0-5CAE-447F-9FB1-7CECE4BCBEE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMathTest.Interfaces", "OnlineMathTest.Interfaces\OnlineMathTest.Interfaces.csproj", "{2D919023-401B-4F5A-9DE5-98872ECF2D78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMathTest.Services", "OnlineMathTest.Services\OnlineMathTest.Services.csproj", "{5CA4CC3D-F5CD-453A-B6F7-29A79B37B834}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMathTest.Common", "OnlineMathTest.Common\OnlineMathTest.Common.csproj", "{4BF1652D-B820-4594-AF03-9A121852416A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +27,30 @@ Global
 		{0336919F-AC35-4730-9279-2C6613947F5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0336919F-AC35-4730-9279-2C6613947F5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0336919F-AC35-4730-9279-2C6613947F5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A8E7CBE-EFEF-4996-86C0-F0EE5BB90E0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A8E7CBE-EFEF-4996-86C0-F0EE5BB90E0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A8E7CBE-EFEF-4996-86C0-F0EE5BB90E0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A8E7CBE-EFEF-4996-86C0-F0EE5BB90E0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4551201D-8523-4C3E-B954-8A6C83922E8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4551201D-8523-4C3E-B954-8A6C83922E8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4551201D-8523-4C3E-B954-8A6C83922E8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4551201D-8523-4C3E-B954-8A6C83922E8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFB44CF0-5CAE-447F-9FB1-7CECE4BCBEE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFB44CF0-5CAE-447F-9FB1-7CECE4BCBEE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFB44CF0-5CAE-447F-9FB1-7CECE4BCBEE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFB44CF0-5CAE-447F-9FB1-7CECE4BCBEE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D919023-401B-4F5A-9DE5-98872ECF2D78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D919023-401B-4F5A-9DE5-98872ECF2D78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D919023-401B-4F5A-9DE5-98872ECF2D78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D919023-401B-4F5A-9DE5-98872ECF2D78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CA4CC3D-F5CD-453A-B6F7-29A79B37B834}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CA4CC3D-F5CD-453A-B6F7-29A79B37B834}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CA4CC3D-F5CD-453A-B6F7-29A79B37B834}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CA4CC3D-F5CD-453A-B6F7-29A79B37B834}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BF1652D-B820-4594-AF03-9A121852416A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BF1652D-B820-4594-AF03-9A121852416A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BF1652D-B820-4594-AF03-9A121852416A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BF1652D-B820-4594-AF03-9A121852416A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
