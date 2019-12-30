@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 
 namespace OnlineMathTest.Models.Models
@@ -18,7 +19,7 @@ namespace OnlineMathTest.Models.Models
         public string Type { get; set; }
         public DateTime? CreateOn { get; set; }
         public bool? IsDeleted { get; set; }
-
+        public int RoleId { get; set; }
         public virtual ICollection<UserTest> UserTest { get; set; }
     }
 }

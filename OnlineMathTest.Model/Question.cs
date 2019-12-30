@@ -18,6 +18,8 @@ namespace OnlineMathTest.Models.Models
         public int? QuestionType { get; set; }
         public int? LevelType { get; set; }
         public string CorrectAnswer { get; set; }
+        public string ImageLink { get; set; }
+        public string Guide { get; set; }
         public DateTime? CreateOn { get; set; }
         public bool? IsDeleted { get; set; }
 

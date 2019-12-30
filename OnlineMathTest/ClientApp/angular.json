@@ -43,7 +43,8 @@
             "aot": false,
             "assets": [
               "ClientApp/src/favicon.icon",
-              "ClientApp/src/assets"
+              "ClientApp/src/assets",
+              "ClientApp/web.config"
             ],
             "styles": [
               "./src/styles.css",

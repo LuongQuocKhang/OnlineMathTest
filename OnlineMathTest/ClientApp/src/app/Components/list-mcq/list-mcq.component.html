@@ -3,134 +3,27 @@
     <h2> Danh sách đề thi </h2>
   </header>
   <ul class="pricing-list bounce-invert">
-    <li class="exclusive">
+    <li class="exclusive" *ngFor='let item of mcqs; let i = index; let last = last'>
       <ul class="pricing-wrapper">
         <li data-type="monthly" class="is-visible">
           <header class="pricing-header">
-            <h2>THI THỬ 2018 – CHUYÊN LÊ QUÝ ĐÔN – ĐIỆN BIÊN (LẦN 2)</h2>
+            <h2>{{item.title}}</h2>
           </header>
           <div class="pricing-body">
             <ul class="pricing-features">
-              <li><em>40</em> Câu hỏi</li>
-              <li><em>thời gian :  </em> 60 phút </li>
-              <li> <a href="#">Thi quốc gia</a> </li>
-              <li><em>Lượt thi : </em> 1 </li>
-              <li><em>Lượt xem : </em> 1 </li>
+              <li><em>{{item.numberOfQuestion}}</em> Câu hỏi</li>
+              <li><em>thời gian : </em> {{item.duration}} phút </li>
+              <li> <a href="#"> {{item.type}} </a> </li>
+              <li><em>Lượt thi : </em> {{item.attempts}} </li>
+              <li><em>Lượt xem : </em> {{item.views}} </li>
+              <li><em> Ngày đăng : </em> {{item.createOn | date: 'dd/MM/yyy' }} </li>
             </ul>
           </div>
           <footer class="pricing-footer">
-            <a class="select" href="#"> Xem </a>
+            <a class="select" href="javascript:;" (click)="viewDetail(item)"> Xem </a>
           </footer>
         </li>
       </ul>
     </li>
-    <li class="exclusive">
-      <ul class="pricing-wrapper">
-        <li data-type="monthly" class="is-visible">
-          <header class="pricing-header">
-            <h2>THI THỬ 2018 – CHUYÊN LÊ QUÝ ĐÔN – ĐIỆN BIÊN (LẦN 2)</h2>
-          </header>
-          <div class="pricing-body">
-            <ul class="pricing-features">
-              <li><em>40</em> Câu hỏi</li>
-              <li><em>thời gian :  </em> 60 phút </li>
-              <li> <a href="#">Thi quốc gia</a> </li>
-              <li><em>Lượt thi : </em> 1 </li>
-              <li><em>Lượt xem : </em> 1 </li>
-            </ul>
-          </div>
-          <footer class="pricing-footer">
-            <a class="select" href="#"> Xem </a>
-          </footer>
-        </li>
-      </ul>
-    </li>
-
-    <li class="exclusive">
-      <ul class="pricing-wrapper">
-        <li data-type="monthly" class="is-visible">
-          <header class="pricing-header">
-            <h2>THI THỬ 2018 – CHUYÊN LÊ QUÝ ĐÔN – ĐIỆN BIÊN (LẦN 2)</h2>
-          </header>
-          <div class="pricing-body">
-            <ul class="pricing-features">
-              <li><em>40</em> Câu hỏi</li>
-              <li><em>thời gian :  </em> 60 phút </li>
-              <li> <a href="#">Thi quốc gia</a> </li>
-              <li><em>Lượt thi : </em> 1 </li>
-              <li><em>Lượt xem : </em> 1 </li>
-            </ul>
-          </div>
-          <footer class="pricing-footer">
-            <a class="select" href="#"> Xem </a>
-          </footer>
-        </li>
-      </ul>
-    </li>
-
-    <li class="exclusive">
-      <ul class="pricing-wrapper">
-        <li data-type="monthly" class="is-visible">
-          <header class="pricing-header">
-            <h2>THI THỬ 2018 – CHUYÊN LÊ QUÝ ĐÔN – ĐIỆN BIÊN (LẦN 2)</h2>
-          </header>
-          <div class="pricing-body">
-            <ul class="pricing-features">
-              <li><em>40</em> Câu hỏi</li>
-              <li><em>thời gian :  </em> 60 phút </li>
-              <li> <a href="#">Thi quốc gia</a> </li>
-              <li><em>Lượt thi : </em> 1 </li>
-              <li><em>Lượt xem : </em> 1 </li>
-            </ul>
-          </div>
-          <footer class="pricing-footer">
-            <a class="select" href="#"> Xem </a>
-          </footer>
-        </li>
-      </ul>
-    </li>
-    <li class="exclusive">
-      <ul class="pricing-wrapper">
-        <li data-type="monthly" class="is-visible">
-          <header class="pricing-header">
-            <h2>THI THỬ 2018 – CHUYÊN LÊ QUÝ ĐÔN – ĐIỆN BIÊN (LẦN 2)</h2>
-          </header>
-          <div class="pricing-body">
-            <ul class="pricing-features">
-              <li><em>40</em> Câu hỏi</li>
-              <li><em>thời gian :  </em> 60 phút </li>
-              <li> <a href="#">Thi quốc gia</a> </li>
-              <li><em>Lượt thi : </em> 1 </li>
-              <li><em>Lượt xem : </em> 1 </li>
-            </ul>
-          </div>
-          <footer class="pricing-footer">
-            <a class="select" href="#"> Xem </a>
-          </footer>
-        </li>
-      </ul>
-    </li>
-    <li class="exclusive">
-      <ul class="pricing-wrapper">
-        <li data-type="monthly" class="is-visible">
-          <header class="pricing-header">
-            <h2>THI THỬ 2018 – CHUYÊN LÊ QUÝ ĐÔN – ĐIỆN BIÊN (LẦN 2)</h2>
-          </header>
-          <div class="pricing-body">
-            <ul class="pricing-features">
-              <li><em>40</em> Câu hỏi</li>
-              <li><em>thời gian :  </em> 60 phút </li>
-              <li> <a href="#">Thi quốc gia</a> </li>
-              <li><em>Lượt thi : </em> 1 </li>
-              <li><em>Lượt xem : </em> 1 </li>
-            </ul>
-          </div>
-          <footer class="pricing-footer">
-            <a class="select" href="#"> Xem </a>
-          </footer>
-        </li>
-      </ul>
-    </li>
-
   </ul>
 </div>

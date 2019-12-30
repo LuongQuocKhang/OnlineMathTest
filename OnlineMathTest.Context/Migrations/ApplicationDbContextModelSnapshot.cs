@@ -184,6 +184,19 @@ namespace OnlineMathTest.Context.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("OnlineMathTest.Model.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("RoleName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Role");
+                });
+
             modelBuilder.Entity("OnlineMathTest.Models.Models.Level", b =>
                 {
                     b.Property<int>("Id")
@@ -298,6 +311,10 @@ namespace OnlineMathTest.Context.Migrations
 
                     b.Property<DateTime?>("CreateOn");
 
+                    b.Property<string>("Guide");
+
+                    b.Property<string>("ImageLink");
+
                     b.Property<bool?>("IsDeleted");
 
                     b.Property<int?>("LevelType");
@@ -369,9 +386,8 @@ namespace OnlineMathTest.Context.Migrations
 
             modelBuilder.Entity("OnlineMathTest.Models.Models.User", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("CreateOn");
 
@@ -382,6 +398,8 @@ namespace OnlineMathTest.Context.Migrations
                     b.Property<string>("Lastname");
 
                     b.Property<string>("Password");
+
+                    b.Property<int>("RoleId");
 
                     b.Property<string>("Type");
 
@@ -404,7 +422,7 @@ namespace OnlineMathTest.Context.Migrations
 
                     b.Property<double?>("Point");
 
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
@@ -530,8 +548,7 @@ namespace OnlineMathTest.Context.Migrations
 
                     b.HasOne("OnlineMathTest.Models.Models.User", "User")
                         .WithMany("UserTest")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

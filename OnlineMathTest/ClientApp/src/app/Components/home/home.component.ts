@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+import { HttpClient } from "@angular/common/http";
+import { SharedService } from "../../Services/sharedService";
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -7,9 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  public mcqs = [] as any;
+  constructor(private http: HttpClient, private sharedService: SharedService,
+    private router: Router, private route: ActivatedRoute) {
+    sharedService.checkAdmin();
   }
 
+  ngOnInit() {
+    this.getAll();
+  }
+  public getAll() {
+    this.http.get('/MCQ/GetMCQs').subscribe(
+      (response: any) => {
+        this.mcqs = response.data;
+      }
+    )
+  }
+
+  public viewDetail(item: any) {
+    this.router.navigate(['/mcqdetail/', item.id]);
+  }
+
+  public viewMore() {
+    this.router.navigate(['/listmcq/']);
+  }
 }

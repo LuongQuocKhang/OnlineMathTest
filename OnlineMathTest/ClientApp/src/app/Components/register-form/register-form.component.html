@@ -20,6 +20,16 @@
             <i class="fa fa-envelope" aria-hidden="true"></i>
           </span>
         </div>
+        <div class="wrap-input100 validate-input">
+          <input class="input100" type="text" name="userName"
+                 [(ngModel)]="userRegistration.userName"
+                 [ngModelOptions]="{standalone: true}"
+                 placeholder="userName">
+          <span class="focus-input100"></span>
+          <span class="symbol-input100">
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+          </span>
+        </div>
 
         <div class="wrap-input100 validate-input" data-validate="Password is required">
           <input class="input100" type="password"
@@ -41,21 +51,21 @@
             <i class="fa fa-lock" aria-hidden="true"></i>
           </span>
         </div>
-        <div class="wrap-input100 validate-input" data-validate="Password is required">
-          <input class="input100" type="password"
+        <div class="wrap-input100 validate-input">
+          <input class="input100" type="text"
                  [(ngModel)]="userRegistration.lastName"
                  [ngModelOptions]="{standalone: true}"
-                 name="pass" placeholder="Họ">
+                 name="lastName" placeholder="Họ">
           <span class="focus-input100"></span>
           <span class="symbol-input100">
             <i class="fa fa-envelope" aria-hidden="true"></i>
           </span>
         </div>
-        <div class="wrap-input100 validate-input" data-validate="Password is required">
-          <input class="input100" type="password"
+        <div class="wrap-input100 validate-input">
+          <input class="input100" type="text"
                  [(ngModel)]="userRegistration.firstName"
                  [ngModelOptions]="{standalone: true}"
-                 name="pass" placeholder="Tên">
+                 name="firstName" placeholder="Tên">
           <span class="focus-input100"></span>
           <span class="symbol-input100">
             <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -63,7 +73,7 @@
         </div>
 
         <div class="container-login100-form-btn">
-          <button class="login100-form-btn" (click)="login()">
+          <button class="login100-form-btn" (click)="register()">
             Đăng ký
           </button>
         </div>

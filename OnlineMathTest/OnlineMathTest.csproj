@@ -11,6 +11,15 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\auth.guard.ts" />
     <None Remove="ClientApp\src\app\Components\list-mcq\mcq-detail.component.ts" />
+    <None Remove="ClientApp\src\app\Directives\math-jax.directive.ts" />
+    <None Remove="ClientApp\src\app\Domain\Interfaces.ts" />
+    <None Remove="ClientApp\src\app\Interceptors\JwtInterceptor.ts" />
+    <None Remove="ClientApp\src\app\Modules\math-jax.module.ts" />
+    <None Remove="ClientApp\src\app\Services\AdminAuthGuardService.ts" />
+    <None Remove="ClientApp\src\app\Services\AuthenticationService.ts" />
+    <None Remove="ClientApp\src\app\Services\AuthGuardService.ts" />
+    <None Remove="ClientApp\src\app\Services\math-jax.service.ts" />
+    <None Remove="ClientApp\src\app\Services\sharedService.ts" />
     <None Remove="ClientApp\src\app\Services\user.service.ts" />
   </ItemGroup>
 
@@ -28,13 +37,23 @@
   <ItemGroup>
     <ProjectReference Include="..\OnlineMathTest.Common\OnlineMathTest.Common.csproj" />
     <ProjectReference Include="..\OnlineMathTest.Context\OnlineMathTest.Context.csproj" />
+    <ProjectReference Include="..\OnlineMathTest.Interfaces\OnlineMathTest.Interfaces.csproj" />
+    <ProjectReference Include="..\OnlineMathTest.Services\OnlineMathTest.Services.csproj" />
     <ProjectReference Include="..\OnlineMathTest.ViewModel\OnlineMathTest.ViewModel.csproj" />
   </ItemGroup>
 
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\Components\list-mcq\mcq-detail.component.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\Interceptors\auth.guard.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Directives\math-jax.directive.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Domain\Interfaces.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Interceptors\JwtInterceptor.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Modules\math-jax.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Services\AdminAuthGuardService.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Services\AuthenticationService.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Services\AuthGuardService.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Services\math-jax.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Services\sharedService.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Services\user.service.ts" />
   </ItemGroup>
 

@@ -3,34 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using OnlineMathTest.Interfaces;
+using OnlineMathTest.Models.Models;
 using OnlineMathTest.ViewModel;
 
 namespace OnlineMathTest.Controllers
 {
-    [Authorize]
-    [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IMapper _mapper;
+        private readonly IUserService _userService;
         public AccountController(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager, IMapper mapper,
+            IUserService userService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _mapper = mapper;
+            _userService = userService;
         }
 
         [TempData]
         public string ErrorMessage { get; set; }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl = null)
         {
             // Clear the existing external cookie to ensure a clean login process
@@ -41,38 +45,34 @@ namespace OnlineMathTest.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Login([FromBody]UserViewModel model)
         {
-            ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
+            ResponseViewModel response = new ResponseViewModel();
+            try
             {
-                // This does not count login failures towards account lockout
-                // To enable password failures to trigger account lockout,
-                // set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
-                if (result.Succeeded)
+                ViewData["ReturnUrl"] = model.ReturnUrl;
+                if (ModelState.IsValid)
                 {
-                    return RedirectToLocal(returnUrl);
-                }
-                //if (result.RequiresTwoFactor)
-                //{
-                //    return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
-                //}
-                //if (result.IsLockedOut)
-                //{
-                //    return RedirectToAction(nameof(Lockout));
-                //}
+                    var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
+                    if (result.Succeeded)
+                    {
+                        var user = await _userManager.FindByNameAsync(model.UserName);
+                        response.success = true;
+                        var _user = _userService.GetUserByUserName(model.UserName);
+                        _user.Id = user.Id;
+                        _user.Email = user.Email;
+                        response.data = _user;
+                    }
+                }    
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return View(model);
+                    response.success = false;
                 }
             }
-
-            // If execution got this far, something failed, redisplay the form.
-            return View(model);
+            catch (Exception e) {
+                response.success = false;
+            }
+            return Json(response);     
         }
 
         [HttpGet]
@@ -80,9 +80,9 @@ namespace OnlineMathTest.Controllers
         public async Task<IActionResult> LoginWith2fa(bool rememberMe, string returnUrl = null)
         {
             // Ensure that the user has gone through the username & password screen first
-            var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
+            var IdentityUser = await _signInManager.GetTwoFactorAuthenticationUserAsync();
 
-            if (user == null)
+            if (IdentityUser == null)
             {
                 throw new ApplicationException($"Unable to load two-factor authentication user.");
             }
@@ -195,31 +195,37 @@ namespace OnlineMathTest.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Register([FromBody]UserViewModel model)
         {
-            ViewData["ReturnUrl"] = returnUrl;
+            ResponseViewModel response = new ResponseViewModel();
+            ViewData["ReturnUrl"] = model.ReturnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                if ( model.comfirmPassword == model.Password)
                 {
-
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    //var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                    //await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
-
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    //_logger.LogInformation("User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    var result = await _userManager.CreateAsync(model, model.Password);
+                    if (result.Succeeded)
+                    {
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(model);
+                        if (_userService.AddUser(model))
+                        {
+                            await _signInManager.SignInAsync(model, isPersistent: false);
+                            response.success = true;
+                        }
+                        else
+                        {
+                            response.success = false;
+                        }
+                    }
+                    else
+                    {
+                        response.success = false;
+                        var error = result.Errors.Select(x => x.Description);
+                        response.errMsg = string.Join(", ", error);
+                    }
                 }
-                AddErrors(result);
             }
-
-            // If execution got this far, something failed, redisplay the form.
-            return View(model);
+            return Json(response);
         }
 
         [HttpPost]
@@ -289,7 +295,7 @@ namespace OnlineMathTest.Controllers
                 {
                     throw new ApplicationException("Error loading external login information during confirmation.");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new IdentityUser { UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

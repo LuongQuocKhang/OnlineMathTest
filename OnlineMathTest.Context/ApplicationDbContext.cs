@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OnlineMathTest.Common;
 using OnlineMathTest.Context.IUnitOfWork;
+using OnlineMathTest.Model;
 using OnlineMathTest.Models.Models;
+using Role = OnlineMathTest.Model.Role;
 
 namespace OnlineMathTest.Context
 {
@@ -24,6 +26,7 @@ namespace OnlineMathTest.Context
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserTest> UserTest { get; set; }
         public virtual DbSet<Mcqhistory> Mcqhistory { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
 
         public DbSet<T> dbSet<T>() where T : class
         {

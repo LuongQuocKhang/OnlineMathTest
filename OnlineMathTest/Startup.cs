@@ -17,6 +17,10 @@ using OnlineMathTest.Common;
 using OnlineMathTest.Context.IUnitOfWork;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using OnlineMathTest.ViewModel;
+using OnlineMathTest.Models.Models;
+using OnlineMathTest.Interfaces;
+using OnlineMathTest.Services;
 
 namespace OnlineMathTest
 {
@@ -31,7 +35,8 @@ namespace OnlineMathTest
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        { 
+        {
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/src";
@@ -46,29 +51,18 @@ namespace OnlineMathTest
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser, IdentityRole>()
+
+            services.AddDefaultIdentity<IdentityUser>()
+                  .AddRoles<IdentityRole>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()
+            services.AddCors(options => options.AddPolicy("AllowAll", p => p
+                                               .AllowAnyOrigin()
                                                .AllowAnyMethod()
                                                .AllowAnyHeader()));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                    .AddRazorPagesOptions(options =>
-                    {
-                        options.AllowAreas = true;
-                        options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
-                        options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
-                    });
-
-                        services.ConfigureApplicationCookie(options =>
-                        {
-                            options.LoginPath = $"/Identity/Account/Login";
-                            options.LogoutPath = $"/Identity/Account/Logout";
-                            options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
-                        });
-
+            
             // using Microsoft.AspNetCore.Identity.UI.Services;
             //services.AddSingleton<IEmailSender, EmailSender>();
 
@@ -79,7 +73,8 @@ namespace OnlineMathTest
         }
         public void ConfigureServiceLayer(IServiceCollection services)
         {
-
+            services.AddScoped<IMCQService, MCQService>();
+            services.AddScoped<IUserService, UserService>();
         }
         public void ConfigureRepository(IServiceCollection services)
         {
@@ -88,12 +83,23 @@ namespace OnlineMathTest
         public void ConfigureContext(IServiceCollection services)
         {
             services.AddDbContext<Context.ApplicationDbContext>(options => options.UseSqlServer(SqlCommon.CONNECTION_STRING));
+            services.AddScoped<IContext, ApplicationDbContext>();
         }
         public void ConfigureMapper(IServiceCollection services)
         {
             var config = new AutoMapper.MapperConfiguration(cfg =>
             {
-               
+                cfg.CreateMap<Mcq, MCQViewModel>();
+                cfg.CreateMap<MCQViewModel, Mcq>();
+
+                cfg.CreateMap<QuestionViewModel, Question>();
+                cfg.CreateMap<Question, QuestionViewModel>();
+
+                cfg.CreateMap<QuestionAnswer, QuestionAnswerViewModel>();
+                cfg.CreateMap<QuestionAnswer, QuestionAnswerViewModel>();
+
+                cfg.CreateMap<User, UserViewModel>().ForMember(x => x.Id,opt => opt.Ignore());
+                cfg.CreateMap<UserViewModel, User>().ForMember(x => x.Id, opt => opt.Ignore());
             });
             var mapper = config.CreateMapper();
             services.AddSingleton(mapper);
@@ -112,13 +118,21 @@ namespace OnlineMathTest
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            app.UseCors("AllowAll");
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseHttpsRedirection();
             app.UseSpaStaticFiles();
-            app.UseCors("AllowAll");
+
             app.UseAuthentication();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller}/{action=Index}/{id?}");
+            });
+
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
@@ -129,19 +143,9 @@ namespace OnlineMathTest
                 if (env.IsDevelopment())
                 {
                     spa.UseAngularCliServer(npmScript: "start");
-                    spa.Options.StartupTimeout = TimeSpan.FromSeconds(100);
+                    spa.Options.StartupTimeout = TimeSpan.FromSeconds(200);
                 }
             });
-
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                name: "default",
-                template: "{ controller = Home}/{ action = Index}/{ id?}");
-                routes.MapSpaFallbackRoute(
-                name: "spa - fallback",
-                defaults: new { controller = "Home", action = "Index" });
-            });   
         }
     }
 }

@@ -17,5 +17,6 @@ namespace OnlineMathTest.ViewModel
         public int? Views { get; set; }
         public int? Attempts { get; set; }
         public string ExamType { get; set; }
+        public List<QuestionViewModel> Questions { get; set; }
     }
 }
