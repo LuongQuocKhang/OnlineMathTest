@@ -386,8 +386,9 @@ namespace OnlineMathTest.Context.Migrations
 
             modelBuilder.Entity("OnlineMathTest.Models.Models.User", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime?>("CreateOn");
 
@@ -424,11 +425,13 @@ namespace OnlineMathTest.Context.Migrations
 
                     b.Property<string>("UserId");
 
+                    b.Property<int?>("UserId1");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Mcqid");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("UserTest");
                 });
@@ -548,7 +551,7 @@ namespace OnlineMathTest.Context.Migrations
 
                     b.HasOne("OnlineMathTest.Models.Models.User", "User")
                         .WithMany("UserTest")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId1");
                 });
 #pragma warning restore 612, 618
         }
