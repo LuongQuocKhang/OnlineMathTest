@@ -11,7 +11,7 @@
   <ul class="pricing-list bounce-invert">
     <li class="exclusive" *ngFor='let item of mcqs; let i = index; let last = last'>
       <ul class="pricing-wrapper">
-        <li data-type="monthly" class="is-visible">
+        <li data-type="monthly" class="is-visible" style="height: 350px;">
           <header class="pricing-header">
             <h2>{{item.title}}</h2>
           </header>
@@ -39,7 +39,7 @@
       <h2> Dạng bài </h2>
     </header>
     <header class="pricing-header" style="float: right;">
-      <h2><a href="#"
+      <h2><a [routerLink]="['/questiontype']"
              style="font-size: 12px !important;">Xem thêm</a></h2>
     </header>
   </div>
@@ -48,16 +48,10 @@
       <ul class="pricing-wrapper">
         <li data-type="monthly" class="is-visible">
           <header class="pricing-header">
-            <h2>Basic</h2>
+            <h2>Đồ thị hàm số </h2>
           </header>
-          <div class="pricing-body">
-            <ul class="pricing-features">
-              <li><em>5</em> Email Accounts</li>
-              <li><em>1</em> Template Style</li>
-            </ul>
-          </div>
           <footer class="pricing-footer">
-            <a class="select" href="#">Sign Up</a>
+            <a class="select" href="#">Xem</a>
           </footer>
         </li>
       </ul>
@@ -66,16 +60,11 @@
       <ul class="pricing-wrapper">
         <li data-type="monthly" class="is-visible">
           <header class="pricing-header">
-            <h2>Basic</h2>
+            <h2>Hình học không gian</h2>
           </header>
-          <div class="pricing-body">
-            <ul class="pricing-features">
-              <li><em>5</em> Email Accounts</li>
-              <li><em>1</em> Template Style</li>
-            </ul>
-          </div>
+         
           <footer class="pricing-footer">
-            <a class="select" href="#">Sign Up</a>
+            <a class="select" href="#">Xem</a>
           </footer>
         </li>
       </ul>
@@ -84,16 +73,10 @@
       <ul class="pricing-wrapper">
         <li data-type="monthly" class="is-visible">
           <header class="pricing-header">
-            <h2>Basic</h2>
+            <h2>Số phức</h2>
           </header>
-          <div class="pricing-body">
-            <ul class="pricing-features">
-              <li><em>5</em> Email Accounts</li>
-              <li><em>1</em> Template Style</li>
-            </ul>
-          </div>
           <footer class="pricing-footer">
-            <a class="select" href="#">Sign Up</a>
+            <a class="select" href="#">Xem</a>
           </footer>
         </li>
       </ul>
@@ -124,7 +107,7 @@
             </ul>
           </div>
           <footer class="pricing-footer">
-            <a class="select" href="#">Sign Up</a>
+            <a class="select" href="#">Xem</a>
           </footer>
         </li>
       </ul>
@@ -142,7 +125,7 @@
             </ul>
           </div>
           <footer class="pricing-footer">
-            <a class="select" href="#">Sign Up</a>
+            <a class="select" href="#">Xem</a>
           </footer>
         </li>
       </ul>
@@ -160,7 +143,7 @@
             </ul>
           </div>
           <footer class="pricing-footer">
-            <a class="select" href="#">Sign Up</a>
+            <a class="select" href="#">Xem</a>
           </footer>
         </li>
       </ul>

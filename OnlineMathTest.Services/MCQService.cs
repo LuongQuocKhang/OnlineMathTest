@@ -32,6 +32,12 @@ namespace OnlineMathTest.Services
             return mcqvm;
         }
 
+        public List<QuestionTypeViewModel> GetAllQuestionType()
+        {
+            var questiontype = _unitOfWork.Repository<QuestionType>().ToList();
+            var result = _mapper.Map<List<QuestionTypeViewModel>>(questiontype);
+            return result;
+        }
         public MCQViewModel GetMCQById(int Id)
         {
             var mcq = _unitOfWork.Repository<Mcq>().FirstOrDefault(x => x.Id == Id);

@@ -1,0 +1,19 @@
+<div class="pricing-container margin-0">
+  <header class="pricing-header">
+    <h2> Danh sách dạng đề thi </h2>
+  </header>
+  <ul class="pricing-list bounce-invert">
+    <li class="exclusive" *ngFor='let item of questiontypes; let i = index; let last = last'>
+      <ul class="pricing-wrapper">
+        <li data-type="monthly" class="is-visible" style="height: 150px;">
+          <header class="pricing-header">
+            <h2>{{item.questionType1}}</h2>
+          </header>
+          <footer class="pricing-footer">
+            <a class="select" href="javascript:;" (click)="viewAllQuestion(item.id)"> Xem </a>
+          </footer>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

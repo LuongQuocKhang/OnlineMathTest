@@ -84,6 +84,10 @@ export class MathJaxModule {
               "width": "fit-content",
               "margin": "0"
             },
+            ".MJXc-display": {
+              "color" : "black !important",
+              "margin": "0 !important"
+            },
             ".MathJax.MathJax_FullWidth": {
               "width": "fit-content !important"
             }
@@ -93,6 +97,7 @@ export class MathJaxModule {
       MathJax.Hub.Register.StartupHook('End', () => {
         window.mathJaxHub$.next();
         window.mathJaxHub$.complete();
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
       });
     }).toString();
 
@@ -118,6 +123,7 @@ export class MathJaxModule {
         document.getElementsByTagName('head')[0].appendChild(script);
       })(moduleConfig.version, moduleConfig.config, moduleConfig.hostname);
     }
+
   }
 
   /**

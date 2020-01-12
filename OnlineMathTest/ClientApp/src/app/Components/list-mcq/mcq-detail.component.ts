@@ -16,16 +16,21 @@ export class McqDetailComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.mcqId = params['id'];
     });
-    this.getMCQById();
+  
   }
 
   ngOnInit() {
-    
+    this.getMCQById();
   }
   public getMCQById() {
     this.http.get('/MCQ/GetMCQById?id=' + this.mcqId).subscribe(
       (response: any) => {
         this.model = response.data;
     })
+  }
+
+  public takeExam() {
+    //this.router.navigate(['/exam/', this.mcqId]);
+    window.location.href = '/exam/' + this.mcqId;
   }
 }

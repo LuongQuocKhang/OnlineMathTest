@@ -879,3 +879,9 @@ b.Answer {
 .answer-display {
   display: inline-block;
 }
+.choice {
+  margin-left: 10px !important;
+  width: 100% !important;
+  display: -webkit-inline-box !important;
+  flex-wrap: wrap !important;
+}

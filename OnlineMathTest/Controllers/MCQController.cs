@@ -49,6 +49,21 @@ namespace OnlineMathTest.Controllers
                 response.errMsg = ex.ToString();
             }
             return Json(response);
+        }  
+        [HttpGet]
+        public IActionResult GetAllQuestionType()
+        {
+            ResponseViewModel response = new ResponseViewModel();
+            try
+            {
+                response.success = true;
+                response.data = _mcqService.GetAllQuestionType();
+            }
+            catch (Exception ex)
+            {
+                response.errMsg = ex.ToString();
+            }
+            return Json(response);
         }
     }
 }

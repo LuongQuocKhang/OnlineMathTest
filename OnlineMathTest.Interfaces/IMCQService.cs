@@ -13,5 +13,6 @@ namespace OnlineMathTest.Interfaces
         MCQViewModel GetMCQById(int Id);
         MCQVHistoryViewModel GetMCQHistory(int Id);
         List<LevelViewModel> GetAllLevel();
+        List<QuestionTypeViewModel> GetAllQuestionType();
     }
 }

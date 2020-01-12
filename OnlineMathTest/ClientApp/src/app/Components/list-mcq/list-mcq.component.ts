@@ -28,6 +28,7 @@ export class ListMcqComponent implements OnInit {
   }
 
   public viewDetail(item: any) {
-    this.router.navigate(['/mcqdetail/', item.id]);
+    //this.router.navigate(['/mcqdetail/', item.id]);
+    window.location.href = '/mcqdetail/' + item.id;
   }
 }

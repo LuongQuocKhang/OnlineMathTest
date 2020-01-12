@@ -1,1 +1,95 @@
-<p>exam works!</p>
+<div class="pricing-container margin-0">
+  <header class="pricing-header">
+    <h2> THI THỬ 2018 – CHUYÊN LÊ QUÝ ĐÔN – ĐIỆN BIÊN (LẦN 2) </h2>
+  </header>
+
+  <div class="container container-fix">
+    <div class="vk-quest__wrapper">
+      <div class="TestContent" style="padding-top: 10px;overflow-y: auto;">
+        <div class="question"
+             style="float: left;display: -webkit-inline-box;"
+             *ngFor='let question of model.questions; let i = index; let last = last'>
+          <p class="Answer-title bold" [id]="question.id">
+            <strong> Câu {{i + 1}} : </strong>
+          </p>
+          <p class="Answer-style title choice" mathjax >
+            {{question.title}}
+          </p>
+
+          <div style="display: contents;">
+            <div class="Answer-image" *ngFor='let answer of question.answers'>
+              <input type="radio"
+                     id="{{answer.id}}"
+                     [(ngModel)]="question.selectedValue" [ngModelOptions]="{standalone: true}"
+                     [value]="answer.displayNumber"
+                     [name]="answer.questionId">
+              <b class="Answer"> {{answer.choice}}: </b>
+              <span class="answer-display" mathjax>{{answer.answer}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vk-quest__sidebar vk-sidebar--quest">
+      <div class="vk-sidebar__box">
+        <div class="vk-time">
+          <h3 class="vk-time__title">Thời gian làm bài</h3>
+          <div class="countDown" data-time-init="5399" style="height: auto;">
+            <span id="min">88</span>
+            <span>:</span>
+            <span id="sec">50</span>
+          </div>
+        </div>
+        <section class="nop-bai">
+          <button type="button" id="nop-bai" class="vk-btn vk-btn--block vk-btn--blue-4 rounded"
+                  data-toggle="modal"
+                  data-target="#examDone"
+                  (click)="submitExam()">NỘP BÀI</button>
+          <button name="btnsub" id="apply_sub"
+                  style="display:none"
+                  >
+            Nộp bài
+          </button>
+        </section>
+      </div>
+      <div class="vk-sidebar__box vk-sidebar__box--rounded">
+        <div class="vk-answer">
+          <h3 class="vk-answer__title">ĐÁP ÁN ĐÃ CHỌN</h3>
+          <div class="vk-table__wrapper">
+            <table class="vk-table vk-table-answer" id="testAns">
+              <thead>
+                <tr>
+                  <th>Câu</th>
+                  <th>A</th>
+                  <th>B</th>
+                  <th>C</th>
+                  <th>D</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor='let question of model.questions; let i = index; let last = last'>
+                  <td>{{i + 1}}</td>
+                  <td *ngFor='let answer of question.answers'>
+                    <input type="radio"
+                           id="{{answer.id}}"
+                           [(ngModel)]="question.selectedValue" [ngModelOptions]="{standalone: true}"
+                           [value]="answer.displayNumber"
+                           [name]="answer.questionId">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <ul class="ft-fix">
+          <li class="nopbai-btn">
+            <button type="button" id="nop-bai" class="white-btn" data-toggle="modal" data-target="#examDone"><i class="material-icons">publish</i></button>
+            <button type="submit" name="btnsub" id="apply_sub" style="display:none"><i class="material-icons">publish</i></button>
+          </li>
+          <li class="result-tbl"><i class="material-icons">list_alt</i></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+ 
+</div>

@@ -96,7 +96,10 @@ namespace OnlineMathTest
                 cfg.CreateMap<Question, QuestionViewModel>();
 
                 cfg.CreateMap<QuestionAnswer, QuestionAnswerViewModel>();
-                cfg.CreateMap<QuestionAnswer, QuestionAnswerViewModel>();
+                cfg.CreateMap<QuestionAnswerViewModel, QuestionAnswer>();
+
+                cfg.CreateMap<QuestionTypeViewModel, QuestionType>();
+                cfg.CreateMap<QuestionType, QuestionTypeViewModel>();
 
                 cfg.CreateMap<User, UserViewModel>().ForMember(x => x.Id,opt => opt.Ignore());
                 cfg.CreateMap<UserViewModel, User>().ForMember(x => x.Id, opt => opt.Ignore());

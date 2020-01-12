@@ -32,7 +32,5 @@ export class MathJaxService {
      * Create a global variable.
      */
     window.mathJaxHub$ = this.MathJaxHub$;
-
   }
-
 }

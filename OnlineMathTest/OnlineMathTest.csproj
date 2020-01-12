@@ -15,6 +15,8 @@
     <None Remove="ClientApp\src\app\Domain\Interfaces.ts" />
     <None Remove="ClientApp\src\app\Interceptors\JwtInterceptor.ts" />
     <None Remove="ClientApp\src\app\Modules\math-jax.module.ts" />
+    <None Remove="ClientApp\src\app\Modules\mcq.module.ts" />
+    <None Remove="ClientApp\src\app\Modules\module.shared.ts" />
     <None Remove="ClientApp\src\app\Services\AdminAuthGuardService.ts" />
     <None Remove="ClientApp\src\app\Services\AuthenticationService.ts" />
     <None Remove="ClientApp\src\app\Services\AuthGuardService.ts" />
@@ -49,6 +51,8 @@
     <TypeScriptCompile Include="ClientApp\src\app\Domain\Interfaces.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Interceptors\JwtInterceptor.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Modules\math-jax.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Modules\mcq.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Modules\module.shared.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Services\AdminAuthGuardService.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Services\AuthenticationService.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Services\AuthGuardService.ts" />
