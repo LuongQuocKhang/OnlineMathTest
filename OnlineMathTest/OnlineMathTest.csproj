@@ -10,10 +10,13 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\auth.guard.ts" />
+    <None Remove="ClientApp\src\app\Components\admin\mcqmanagement\mcqmanagement.add.component.ts" />
+    <None Remove="ClientApp\src\app\Components\admin\mcqmanagement\mcqmanagement.edit.component.ts" />
     <None Remove="ClientApp\src\app\Components\list-mcq\mcq-detail.component.ts" />
     <None Remove="ClientApp\src\app\Directives\math-jax.directive.ts" />
     <None Remove="ClientApp\src\app\Domain\Interfaces.ts" />
     <None Remove="ClientApp\src\app\Interceptors\JwtInterceptor.ts" />
+    <None Remove="ClientApp\src\app\Modules\admin.module.ts" />
     <None Remove="ClientApp\src\app\Modules\math-jax.module.ts" />
     <None Remove="ClientApp\src\app\Modules\mcq.module.ts" />
     <None Remove="ClientApp\src\app\Modules\module.shared.ts" />
@@ -32,7 +35,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
   </ItemGroup>
 
 
@@ -46,10 +49,13 @@
 
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\Components\admin\mcqmanagement\mcqmanagement.add.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Components\admin\mcqmanagement\mcqmanagement.edit.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Components\list-mcq\mcq-detail.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Directives\math-jax.directive.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Domain\Interfaces.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Interceptors\JwtInterceptor.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Modules\admin.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Modules\math-jax.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Modules\mcq.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Modules\module.shared.ts" />
