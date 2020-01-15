@@ -27,7 +27,7 @@ namespace OnlineMathTest.Services
                 var _user = _mapper.Map<User>(user);
                 _unitOfWork.Repository<User>().Add(_user);
 
-                _user.RoleId = (int)Role.USER;
+                _user.RoleId = (int)Common.Role.USER;
                 _unitOfWork.SaveChanges();
                 return true;
             }
@@ -37,9 +37,21 @@ namespace OnlineMathTest.Services
 
         public List<UserReturnViewModel> GetAllUsers()
         {
-            var users = _unitOfWork.Repository<User>();
+            var users = _unitOfWork.Repository<User>().Where(x => !x.IsDeleted.Value);
             var result = _mapper.Map<List<UserReturnViewModel>>(users);
             return result;
+        }
+
+        public List<Model.Role> GetRoles()
+        {
+            return _unitOfWork.Repository<Model.Role>().ToList();
+        }
+
+        public UserReturnViewModel GetUserById(string Id)
+        {
+            var user = _unitOfWork.Repository<User>().FirstOrDefault(x => x.Id.ToString() == Id);
+            var uservm = _mapper.Map<UserReturnViewModel>(user);
+            return uservm;
         }
 
         public UserReturnViewModel GetUserByUserName(string username)
@@ -52,6 +64,21 @@ namespace OnlineMathTest.Services
                 Role = role.RoleName
             };
             return result;
+        }
+
+        public bool UpdateUser(UserReturnViewModel user)
+        {
+            var _user = _unitOfWork.Repository<User>().FirstOrDefault(x => x.Id.ToString() == user.Id);
+            _mapper.Map(user, _user);
+            _unitOfWork.SaveChanges();
+            return true;
+        } 
+        public bool DeleteUser(UserReturnViewModel user)
+        {
+            var _user = _unitOfWork.Repository<User>().FirstOrDefault(x => x.Id.ToString() == user.Id);
+            _user.IsDeleted = true;
+            _unitOfWork.SaveChanges();
+            return true;
         }
     }
 }

@@ -30,10 +30,10 @@
             <td> {{user.lastName}} </td>
             <td> {{user.email}} </td>
             <td>
-              <a class="btn btn-primary btn-sm" href="javascript:;">
+              <a class="btn btn-primary btn-sm" href="javascript:;"  (click)="updateUser(user.id)">
                 <span class="fa fa-pencil"></span>
               </a>
-              <a class="btn btn-danger btn-sm" href="javascript:;" style="margin-left: 5px;">
+              <a class="btn btn-danger btn-sm" href="javascript:;" style="margin-left: 5px;" (click)="deleteUser(user)">
                 <span class="fa fa-trash-o"></span>
               </a>
             </td>

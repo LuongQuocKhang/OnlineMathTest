@@ -27,12 +27,16 @@
           <input class="form-control" type="text" name="firstName" [(ngModel)]="user.firstName" [ngModelOptions]="{standalone: true}" />
         </div>
         <div class="form-group">
-          <label for="email"> Email </label>
-          <input class="form-control" type="text" name="email" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}" />
+          <label for="userName"> Tên đăng nhập </label>
+          <input class="form-control" type="text" disabled name="email" [(ngModel)]="user.userName" [ngModelOptions]="{standalone: true}" />
         </div>
         <div class="form-group">
-          <label for="level"> Độ khó </label>
-          <select class="form-control" type="text" name="level" [(ngModel)]="question.roleId" [ngModelOptions]="{standalone: true}">
+          <label for="email"> Email </label>
+          <input class="form-control" type="email" name="email" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}" />
+        </div>
+        <div class="form-group">
+          <label for="level"> Vai trò </label>
+          <select class="form-control" type="text" name="level" [(ngModel)]="user.roleId" [ngModelOptions]="{standalone: true}">
             <option *ngFor="let r of roles" [ngValue]="r.id">{{r.roleName}}</option>
           </select>
         </div>

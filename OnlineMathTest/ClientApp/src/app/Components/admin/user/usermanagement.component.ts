@@ -24,4 +24,19 @@ export class UserManagementComponent implements OnInit {
         }
       })
   }
+  public updateUser(id: any) {
+    this.router.navigate(['/adminpage/usermanagement/edit', id]);
+  }
+  public deleteUser(user: any) {
+    this.http.post('/adminpage/usermanagement/deleteUser', user)
+      .subscribe((response: any) => {
+        if (response.success) {
+          this.sharedService.show('Xóa thành công', 'SUCCESS');
+          this.getAllUser();
+        }
+        else {
+          this.sharedService.show('Xóa không thành công', 'ERROR');
+        }
+      })
+  }
 }

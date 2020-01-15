@@ -17,12 +17,14 @@ export class EditUserManagementComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.userId = params['id'];
     });
+    this.getRoles();
+    this.getUserById(this.userId);
   }
 
   ngOnInit() {
   }
   public getRoles() {
-    this.http.get('/adminpage/usermanagemanet/getRoles')
+    this.http.get('/adminpage/usermanagement/getRoles')
       .subscribe((response: any) => {
         if (response.success) {
           this.roles = response.data;
@@ -34,6 +36,17 @@ export class EditUserManagementComponent implements OnInit {
       .subscribe((response: any) => {
         if (response.success) {
           this.user = response.data;
+        }
+      })
+  }
+  public updateUser() {
+    this.http.post('/adminpage/usermanagement/updateUser', this.user)
+      .subscribe((response: any) => {
+        if (response.success) {
+          this.sharedService.show('Cập nhật thành công', 'SUCCESS');
+        }
+        else {
+          this.sharedService.show('Cập nhật không thành công', 'ERROR');
         }
       })
   }

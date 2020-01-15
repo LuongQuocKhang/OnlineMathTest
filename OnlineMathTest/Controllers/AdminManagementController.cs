@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineMathTest.Interfaces;
+using OnlineMathTest.Models.Models;
 using OnlineMathTest.ViewModel;
 
 namespace OnlineMathTest.Controllers
@@ -16,11 +19,16 @@ namespace OnlineMathTest.Controllers
         private readonly IMCQService _mcqService;
         private readonly IQuestionService _questionService;
         private readonly IUserService _userService;
-        public AdminManagementController(IMCQService mcqService, IQuestionService questionService, IUserService userService)
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IMapper _mapper;
+        public AdminManagementController(IMCQService mcqService, IQuestionService questionService, IUserService userService,
+            UserManager<IdentityUser> userManager, IMapper mapper)
         {
             _mcqService = mcqService;
             _questionService = questionService;
             _userService = userService;
+            _userManager = userManager;
+            _mapper = mapper;
         }
         public IActionResult Index()
         {
@@ -185,5 +193,80 @@ namespace OnlineMathTest.Controllers
             }
             return Json(response);
         }
+        [Route("/adminpage/usermanagement/getRoles")]
+        [HttpGet]
+        public IActionResult GetRoles()
+        {
+            ResponseViewModel response = new ResponseViewModel();
+            try
+            {
+                response.success = true;
+                response.data = _userService.GetRoles();
+            }
+            catch (Exception e)
+            {
+                response.errMsg = e.ToString();
+            }
+            return Json(response);
+        } 
+        [Route("/adminpage/usermanagement/getUserById")]
+        [HttpGet]
+        public IActionResult GetUserById(string Id)
+        {
+            ResponseViewModel response = new ResponseViewModel();
+            try
+            {
+                response.success = true;
+                response.data = _userService.GetUserById(Id);
+            }
+            catch (Exception e)
+            {
+                response.errMsg = e.ToString();
+            }
+            return Json(response);
+        }
+        [Route("/adminpage/usermanagement/updateUser")]
+        [HttpPost]
+        public IActionResult UpdateUser([FromBody]UserReturnViewModel user)
+        {
+            ResponseViewModel response = new ResponseViewModel();
+            try
+            {
+                var _user = _userManager.FindByNameAsync(user.UserName).Result;
+                _user.Email = user.Email;
+                _user.NormalizedEmail = user.Email.ToUpper();
+                _userManager.UpdateAsync(_user);
+
+                response.success = _userService.UpdateUser(user);
+            }
+            catch (Exception e)
+            {
+                response.success = false;
+                response.errMsg = e.ToString();
+            }
+            return Json(response);
+        }
+
+        [Route("/adminpage/usermanagement/deleteUser")]
+        [HttpPost]
+        public IActionResult DeleteUser([FromBody]UserReturnViewModel user)
+        {
+            ResponseViewModel response = new ResponseViewModel();
+            try
+            {
+                var _user = _userManager.FindByNameAsync(user.UserName).Result;
+                _userManager.DeleteAsync(_user);
+
+                response.success = _userService.DeleteUser(user);
+            }
+            catch (Exception e)
+            {
+                response.success = false;
+                response.errMsg = e.ToString();
+            }
+            return Json(response);
+        }
+
+
     }
 }

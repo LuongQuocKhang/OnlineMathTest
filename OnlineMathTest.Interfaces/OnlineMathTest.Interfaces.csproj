@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OnlineMathTest.Model\OnlineMathTest.Model.csproj" />
     <ProjectReference Include="..\OnlineMathTest.ViewModel\OnlineMathTest.ViewModel.csproj" />
   </ItemGroup>
 

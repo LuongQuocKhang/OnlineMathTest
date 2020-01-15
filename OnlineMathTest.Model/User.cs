@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OnlineMathTest.Models.Models
 {
@@ -20,6 +21,12 @@ namespace OnlineMathTest.Models.Models
         public DateTime? CreateOn { get; set; }
         public bool? IsDeleted { get; set; }
         public int RoleId { get; set; }
+        public string Email { get; set; }
         public virtual ICollection<UserTest> UserTest { get; set; }
+
+        public static explicit operator User(Task<IdentityUser> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
