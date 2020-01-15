@@ -74,6 +74,7 @@ namespace OnlineMathTest
         public void ConfigureServiceLayer(IServiceCollection services)
         {
             services.AddScoped<IMCQService, MCQService>();
+            services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IUserService, UserService>();
         }
         public void ConfigureRepository(IServiceCollection services)
@@ -101,8 +102,14 @@ namespace OnlineMathTest
                 cfg.CreateMap<QuestionTypeViewModel, QuestionType>();
                 cfg.CreateMap<QuestionType, QuestionTypeViewModel>();
 
+                cfg.CreateMap<LevelViewModel, Level>();
+                cfg.CreateMap<Level, LevelViewModel>();
+
                 cfg.CreateMap<User, UserViewModel>().ForMember(x => x.Id,opt => opt.Ignore());
                 cfg.CreateMap<UserViewModel, User>().ForMember(x => x.Id, opt => opt.Ignore());
+
+                cfg.CreateMap<User, UserReturnViewModel>();
+                cfg.CreateMap<UserReturnViewModel, User>();
             });
             var mapper = config.CreateMapper();
             services.AddSingleton(mapper);

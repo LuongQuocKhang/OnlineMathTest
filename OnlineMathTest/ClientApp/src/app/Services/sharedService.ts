@@ -42,7 +42,8 @@ export class SharedService {
         toastr.options = {
           closeButton: false,
           positionClass: 'toast-top-right',
-          onclick: null
+          onclick: null,
+          fadeOut : 10000,
         };
         if (code == null || code == undefined || code == '') {
           code = 'SCC_SAVE_SUCCESSFUL'

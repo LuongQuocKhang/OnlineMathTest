@@ -1,1 +1,30 @@
-<p>mcqquestion works!</p>
+<div class="container pd-x-0 pd-lg-x-10 pd-xl-x-0">
+  <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-30">
+    <div style="width: 50%;">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-style1 mg-b-10">
+          <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Dashboard</a></li>
+          <li class="breadcrumb-item" aria-current="page"> Ngân hàng câu hỏi </li>
+        </ol>
+      </nav>
+      <h4 class="mg-b-0 tx-spacing--1"> Ngân hàng câu hỏi </h4>
+    </div>
+    <div class="d-none d-md-block">
+      <a class="btn pd-x-15 btn-primary btn-uppercase mg-l-5"
+         href="javascript:;" [routerLink]="['/adminpage/mcqquestion/add']"><i data-feather="plus" class="wd-10 mg-r-5"></i> Thêm mới </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-bordered table-general" id="tblDatatable" style="margin: 0 !important">
+        <thead>
+          <tr>
+            <td> Tên câu hỏi </td>
+            <th style="width: 100px;"></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</div>

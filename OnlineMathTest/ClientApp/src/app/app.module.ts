@@ -33,7 +33,8 @@ import { AdminModule } from './Modules/admin.module';
     RegisterFormComponent,
     ExamComponent,
     DasboardComponent,
-    QuestiontypeComponent
+    QuestiontypeComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -49,9 +50,9 @@ import { AdminModule } from './Modules/admin.module';
       { path: 'login', component: LoginFormComponent },
       { path: 'register', component: RegisterFormComponent },
       { path: 'dashboard', component: DasboardComponent, canActivate: [AdminAuthGuardService] },
-      { path: 'admin', loadChildren: './Modules/admin.module#AdminModule', canActivate: [AdminAuthGuardService] },
+      { path: 'adminpage', loadChildren: './Modules/admin.module#AdminModule', canActivate: [AdminAuthGuardService] },
       { path: '**', component: HomeComponent },
-    ])
+    ], { useHash: true })
   ],
   providers: [
     SharedService,

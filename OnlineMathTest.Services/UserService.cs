@@ -35,6 +35,13 @@ namespace OnlineMathTest.Services
             return false;
         }
 
+        public List<UserReturnViewModel> GetAllUsers()
+        {
+            var users = _unitOfWork.Repository<User>();
+            var result = _mapper.Map<List<UserReturnViewModel>>(users);
+            return result;
+        }
+
         public UserReturnViewModel GetUserByUserName(string username)
         {
             var user = _unitOfWork.Repository<User>().FirstOrDefault(x => x.Username == username);

@@ -1,0 +1,75 @@
+<div class="container pd-x-0 pd-lg-x-10 pd-xl-x-0">
+  <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-30">
+    <div style="width: 50%;">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-style1 mg-b-10">
+          <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Dashboard</a></li>
+          <li class="breadcrumb-item" [routerLink]="['/adminpage/mcqquestion']"> Ngân hàng câu hỏi </li>
+          <li class="breadcrumb-item" aria-current="page"> Sửa câu hỏi </li>
+        </ol>
+      </nav>
+      <h4 class="mg-b-0 tx-spacing--1"> Ngân hàng câu hỏi </h4>
+    </div>
+    <div class="d-none d-md-block">
+      <a class="btn pd-x-15 btn-primary btn-uppercase mg-l-5"
+         href="javascript:;" (click)="updateQuestion()"><i data-feather="plus" class="wd-10 mg-r-5"></i> Lưu </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <form action="/" method="post">
+        <div class="form-group">
+          <label for="title"> Câu hỏi </label>
+          <input class="form-control" type="text" name="title" [(ngModel)]="question.title" [ngModelOptions]="{standalone: true}" />
+        </div>
+        <div class="form-group">
+          <label for="questiontype"> Loại câu hỏi </label>
+          <select class="form-control" type="text" name="questionType" [(ngModel)]="question.questionType" [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let q of questionTypes" [ngValue]="q.id">{{q.questionType1}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="point"> Điểm </label>
+          <input class="form-control" type="text" name="point" [(ngModel)]="question.point" [ngModelOptions]="{standalone: true}" />
+        </div>
+        <div class="form-group">
+          <label for="correctAnswer"> Đáp án đúng </label>
+          <input class="form-control" type="text" name="correctAnswer" [(ngModel)]="question.correctAnswer" [ngModelOptions]="{standalone: true}" />
+        </div>
+        <div class="form-group">
+          <label for="imageLink"> ImageLink </label>
+          <input class="form-control" type="text" name="imageLink" [(ngModel)]="question.imageLink" [ngModelOptions]="{standalone: true}" />
+        </div>
+
+        <div class="form-group">
+          <label for="guide"> Hướng dẫn giải </label>
+          <textarea class="form-control" type="text" name="guide" [(ngModel)]="question.guide" [ngModelOptions]="{standalone: true}"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="level"> Độ khó </label>
+          <select class="form-control" type="text" name="level" [(ngModel)]="question.levelType" [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let q of levels" [ngValue]="q.id">{{q.levelName}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <div class="panel">
+            <div class="panel panel-heading">
+              <h4> Đáp án </h4>
+            </div>
+            <div class="panel panel-default">
+
+              <div class="row" style="margin-top: 10px;" *ngFor="let item of question.answers">
+                <label for="" class="col-form-label">{{item.choice}}</label>
+                <div class="col-sm-10">
+                  <input type="text" [(ngModel)]="item.answer" [ngModelOptions]="{standalone: true}"
+                         class="form-control">
+                </div>
+              </div>        
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -9,5 +9,6 @@ namespace OnlineMathTest.Interfaces
     {
         bool AddUser(UserViewModel user);
         UserReturnViewModel GetUserByUserName(string username);
+        List<UserReturnViewModel> GetAllUsers();
     }
 }

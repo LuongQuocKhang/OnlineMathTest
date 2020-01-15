@@ -12,6 +12,9 @@
     <None Remove="ClientApp\src\app\auth.guard.ts" />
     <None Remove="ClientApp\src\app\Components\admin\mcqmanagement\mcqmanagement.add.component.ts" />
     <None Remove="ClientApp\src\app\Components\admin\mcqmanagement\mcqmanagement.edit.component.ts" />
+    <None Remove="ClientApp\src\app\Components\admin\mcqquestion\mcqquestion.add.component.ts" />
+    <None Remove="ClientApp\src\app\Components\admin\mcqquestion\mcqquestion.edit.component.ts" />
+    <None Remove="ClientApp\src\app\Components\admin\user\usermanagement.edit.component.ts" />
     <None Remove="ClientApp\src\app\Components\list-mcq\mcq-detail.component.ts" />
     <None Remove="ClientApp\src\app\Directives\math-jax.directive.ts" />
     <None Remove="ClientApp\src\app\Domain\Interfaces.ts" />
@@ -51,6 +54,9 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\Components\admin\mcqmanagement\mcqmanagement.add.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Components\admin\mcqmanagement\mcqmanagement.edit.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Components\admin\mcqquestion\mcqquestion.add.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Components\admin\mcqquestion\mcqquestion.edit.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Components\admin\user\usermanagement.edit.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Components\list-mcq\mcq-detail.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Directives\math-jax.directive.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Domain\Interfaces.ts" />

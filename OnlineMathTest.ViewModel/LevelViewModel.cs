@@ -6,5 +6,7 @@ namespace OnlineMathTest.ViewModel
 {
     public class LevelViewModel
     {
+        public int Id { get; set; }
+        public string LevelName { get; set; }
     }
 }

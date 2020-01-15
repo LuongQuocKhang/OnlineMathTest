@@ -1,0 +1,43 @@
+<div class="container pd-x-0 pd-lg-x-10 pd-xl-x-0">
+  <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-30">
+    <div style="width: 50%;">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-style1 mg-b-10">
+          <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Dashboard</a></li>
+          <li class="breadcrumb-item"> <a href="javascript:;" [routerLink]="['/adminpage/usermanagemant']"> Quản lý người dùng</a>  </li>
+        </ol>
+      </nav>
+      <h4 class="mg-b-0 tx-spacing--1"> Cập nhật người dùng </h4>
+    </div>
+    <div class="d-none d-md-block">
+      <a class="btn pd-x-15 btn-primary btn-uppercase mg-l-5"
+         href="javascript:;" (click)="updateUser()"><i data-feather="plus" class="wd-10 mg-r-5"></i> Lưu </a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <form action="/" method="post">
+        <div class="form-group">
+          <label for="lastName"> Họ </label>
+          <input class="form-control" type="text" name="lastName" [(ngModel)]="user.lastName" [ngModelOptions]="{standalone: true}" />
+        </div>
+        <div class="form-group">
+          <label for="firstName"> Tên </label>
+          <input class="form-control" type="text" name="firstName" [(ngModel)]="user.firstName" [ngModelOptions]="{standalone: true}" />
+        </div>
+        <div class="form-group">
+          <label for="email"> Email </label>
+          <input class="form-control" type="text" name="email" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}" />
+        </div>
+        <div class="form-group">
+          <label for="level"> Độ khó </label>
+          <select class="form-control" type="text" name="level" [(ngModel)]="question.roleId" [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let r of roles" [ngValue]="r.id">{{r.roleName}}</option>
+          </select>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

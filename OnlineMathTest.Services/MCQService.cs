@@ -22,12 +22,15 @@ namespace OnlineMathTest.Services
 
         public List<LevelViewModel> GetAllLevel()
         {
-            throw new NotImplementedException();
+            var level = _unitOfWork.Repository<Level>();
+            var result = _mapper.Map<List<LevelViewModel>>(level.ToList());
+            return result;
         }
 
-        public List<MCQViewModel> GetAllMCQ(int pageLength = 0, int pageSize = 6)
+        public List<MCQViewModel> GetAllMCQ(int pageLength = 0, int pageSize = 10)
         {
-            var mcq = _unitOfWork.Repository<Mcq>().OrderBy(x => x.CreateOn).Skip(pageLength).Take(pageSize);
+            var mcq = _unitOfWork.Repository<Mcq>().Where(x => !x.IsDeleted.Value)
+                .OrderBy(x => x.CreateOn).Skip(pageLength).Take(pageSize);
             var mcqvm = _mapper.Map<List<MCQViewModel>>(mcq.ToList());
             return mcqvm;
         }
