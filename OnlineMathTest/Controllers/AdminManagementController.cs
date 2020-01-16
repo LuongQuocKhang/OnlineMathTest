@@ -48,25 +48,44 @@ namespace OnlineMathTest.Controllers
             }
             catch (Exception e)
             {
+                response.success = false;
                 response.errMsg = e.ToString();
             }
             return Json(response);
         }
         [HttpPost]
-        [Route("/adminpage/mcq/add")]
+        [Route("/adminpage/mcq/addmcq")]
         public IActionResult AddMCQ([FromBody]MCQViewModel mcq)
         {
             ResponseViewModel response = new ResponseViewModel();
             try
             {
-
+                response.success = _mcqService.AddMCQ(mcq);
             }
             catch (Exception e)
             {
+                response.success = false;
                 response.errMsg = e.ToString();
             }
             return Json(response);
         }
+        [HttpPost]
+        [Route("/adminpage/mcq/deletemcq")]
+        public IActionResult deleteMCQ([FromBody]MCQViewModel mcq)
+        {
+            ResponseViewModel response = new ResponseViewModel();
+            try
+            {
+                response.success = _mcqService.DeleteMCQ(mcq);
+
+            }
+            catch (Exception e)
+            {
+                response.success = false;
+                response.errMsg = e.ToString();
+            }
+            return Json(response);
+        }   
         // mcq question
         [HttpPost]
         [Route("/adminpage/mcqquestion")]
@@ -83,7 +102,24 @@ namespace OnlineMathTest.Controllers
 
             return Json(response);
         }
-
+        [HttpGet]
+        [Route("/adminpage/mcqquestion/getAllQuestion")]
+        public IActionResult GetAllQuestion()
+        {
+            ResponseViewModel response = new ResponseViewModel();
+            try
+            {
+                response.success = true;
+                response.data = _questionService.GetAllQuestion();
+            }
+            catch (Exception e)
+            {
+                response.success = false;
+                response.errMsg = e.ToString();
+            }
+            return Json(response);
+        }
+       
         [HttpGet]
         [Route("/adminpage/mcqquestion/getAllQuestionType")]
         public IActionResult GetAllQuestionType()
@@ -96,6 +132,7 @@ namespace OnlineMathTest.Controllers
             }
             catch (Exception e)
             {
+                response.success = false;
                 response.errMsg = e.ToString();
             }
             return Json(response);
@@ -112,6 +149,7 @@ namespace OnlineMathTest.Controllers
             }
             catch (Exception e)
             {
+                response.success = false;
                 response.errMsg = e.ToString();
             }
             return Json(response);
@@ -129,6 +167,7 @@ namespace OnlineMathTest.Controllers
             }
             catch (Exception e)
             {
+                response.success = false;
                 response.errMsg = e.ToString();
             }
             return Json(response);
@@ -144,6 +183,7 @@ namespace OnlineMathTest.Controllers
                 response.success = _questionService.AddQuestion(model);
             }
             catch (Exception e) {
+                response.success = false;
                 response.errMsg = e.ToString();
             }
             return Json(response);
@@ -158,6 +198,7 @@ namespace OnlineMathTest.Controllers
                 response.success = _questionService.UpdateQuestion(model);
             }
             catch (Exception e) {
+                response.success = false;
                 response.errMsg = e.ToString();
             }
             return Json(response);
@@ -173,6 +214,7 @@ namespace OnlineMathTest.Controllers
             }
             catch (Exception e)
             {
+                response.success = false;
                 response.errMsg = e.ToString();
             }
             return Json(response);
@@ -189,6 +231,7 @@ namespace OnlineMathTest.Controllers
             }
             catch (Exception e)
             {
+                response.success = false;
                 response.errMsg = e.ToString();
             }
             return Json(response);
@@ -205,6 +248,7 @@ namespace OnlineMathTest.Controllers
             }
             catch (Exception e)
             {
+                response.success = false;
                 response.errMsg = e.ToString();
             }
             return Json(response);
@@ -221,6 +265,7 @@ namespace OnlineMathTest.Controllers
             }
             catch (Exception e)
             {
+                response.success = false;
                 response.errMsg = e.ToString();
             }
             return Json(response);

@@ -289,3 +289,7 @@ svg#clouds {
 .cls-2 {
   fill: #ffffff;
 }
+.modal-dialog .modal-header {
+  background: #50AF97;
+  color: #fff;
+}

@@ -16,6 +16,8 @@ export class McqQuestionComponent implements OnInit {
   public isLoaded = true;
   isInitDatatable = false;
   tableMain: any;
+  public questions = [] as any;
+
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute,
     private sharedService: SharedService) {
     

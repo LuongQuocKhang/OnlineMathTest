@@ -27,10 +27,10 @@ export class HomeComponent implements OnInit {
   }
 
   public viewDetail(item: any) {
-    this.router.navigate(['/mcqdetail/', item.id]);
+    window.location.href = 'r' + '/#/mcq/mcqdetail/' + item.id;
   }
 
   public viewMore() {
-    this.router.navigate(['/listmcq/']);
+    this.router.navigate(['/mcq/listmcq/']);
   }
 }

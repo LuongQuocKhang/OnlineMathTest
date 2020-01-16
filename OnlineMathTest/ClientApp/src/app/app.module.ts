@@ -11,18 +11,19 @@ import { LoginFormComponent } from './Components/login-form/login-form.component
 import { RegisterFormComponent } from './Components/register-form/register-form.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-
-import { MCQModule } from './Modules/mcq.module';
 import { SharedService } from './Services/sharedService';
 
 import { AuthenticationService } from './Services/AuthenticationService';
 import { JwtInterceptor } from './Interceptors/JwtInterceptor';
-import { ExamComponent } from './Components/exam/exam.component';
 import { DasboardComponent } from './Components/dasboard/dasboard.component';
 import { AdminAuthGuardService } from './Services/AdminAuthGuardService';
 import { QuestiontypeComponent } from './Components/questiontype/questiontype.component';
 import { UserComponent } from './Components/user/user.component';
 import { AdminModule } from './Modules/admin.module';
+import { MathJaxModule } from './Modules/math-jax.module';
+import { MathJaxService } from './services/math-jax.service';
+import { AuthGuardService } from './Services/AuthGuardService';
+import { MCQModule } from './Modules/mcq.module';
 
 @NgModule({
   declarations: [
@@ -31,17 +32,16 @@ import { AdminModule } from './Modules/admin.module';
     NavMenuComponent,
     LoginFormComponent,
     RegisterFormComponent,
-    ExamComponent,
     DasboardComponent,
     QuestiontypeComponent,
-    UserComponent
+    UserComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    MCQModule,
     AdminModule,
+    MCQModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'mcq', loadChildren: './Modules/mcq.module#MCQModule' },
@@ -52,13 +52,13 @@ import { AdminModule } from './Modules/admin.module';
       { path: 'dashboard', component: DasboardComponent, canActivate: [AdminAuthGuardService] },
       { path: 'adminpage', loadChildren: './Modules/admin.module#AdminModule', canActivate: [AdminAuthGuardService] },
       { path: '**', component: HomeComponent },
-    ], { useHash: true })
+    ], { useHash: true }),
+ 
   ],
   providers: [
     SharedService,
     AdminAuthGuardService,
     AuthenticationService,
-
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,

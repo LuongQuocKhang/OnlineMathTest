@@ -13,8 +13,8 @@ namespace OnlineMathTest.ViewModel
         public string AnswerType { get; set; }
         public string AnswerTypeChoice { get; set; }
         public int? DisplayNumber { get; set; }
-        public DateTime? CreateOn { get; set; }
-        public bool? IsDeleted { get; set; }
+        public DateTime? CreateOn { get; set; } = DateTime.Now;
+        public bool? IsDeleted { get; set; } = false;
 
     }
 }

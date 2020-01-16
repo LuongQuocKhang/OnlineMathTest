@@ -1,0 +1,119 @@
+<div class="pricing-container margin-0">
+  <header class="pricing-header">
+    <h2> THI THỬ 2018 – CHUYÊN LÊ QUÝ ĐÔN – ĐIỆN BIÊN (LẦN 2) </h2>
+  </header>
+
+  <div class="container container-fix">
+    <div class="vk-quest__wrapper">
+      <div class="TestContent" style="padding-top: 10px;overflow-y: auto;">
+        <div class="question"
+             style="float: left;display: -webkit-inline-box;"
+             *ngFor='let question of model.questions; let i = index; let last = last'>
+          <p class="Answer-title bold" [id]="question.id">
+            <strong> Câu {{i + 1}} : </strong>
+          </p>
+          <p class="Answer-style title choice" mathjax>
+            {{question.title}}
+          </p>
+
+          <div style="display: contents;">
+            <div class="Answer-image" *ngFor='let answer of question.answers'>
+              <label class="rad"
+                     *ngIf="question.selectedValue == question.correctAnswer && question.selectedValue == answer.displayNumber">
+                <input type="radio" checked disabled>
+                <i class="correct-answer"></i>
+              </label>
+              <label class="rad"
+                     *ngIf="question.selectedValue != question.correctAnswer && question.correctAnswer == answer.displayNumber">
+                <input type="radio" checked disabled>
+                <i class="wrong-answer"></i>
+              </label>
+
+              <label class="rad"
+                     *ngIf="question.selectedValue != question.correctAnswer &&
+                                  question.selectedValue == answer.displayNumber">
+                <input type="radio" checked disabled>
+                <i class="user-answer"></i>
+              </label>
+
+              <label class="rad"
+                     *ngIf="answer.displayNumber != question.selectedValue && answer.displayNumber != question.correctAnswer">
+                <input type="radio" disabled>
+                <i></i>
+              </label>
+
+              <label class="Answer" style="margin-left: 5px;"> {{answer.choice}}: </label>
+              <span class="answer-display" mathjax>{{answer.answer}}</span>
+            </div>
+            <div class="Answer-image question-guide">
+              <h5> <strong>Đáp án</strong> </h5>
+              <div class="panel panel-default" mathjax>
+                {{question.guide}}
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vk-quest__sidebar vk-sidebar--quest">
+      <div class="vk-sidebar__box vk-sidebar__box--rounded">
+        <div class="vk-answer">
+          <h3 class="vk-answer__title">ĐÁP ÁN ĐÃ CHỌN</h3>
+          <div class="vk-table__wrapper">
+            <table class="vk-table vk-table-answer" id="testAns">
+              <thead>
+                <tr>
+                  <th>Câu</th>
+                  <th>A</th>
+                  <th>B</th>
+                  <th>C</th>
+                  <th>D</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor='let question of model.questions; let i = index; let last = last'>
+                  <td>{{i + 1}}</td>
+                  <td *ngFor='let answer of question.answers'>
+                    <label class="rad"
+                           *ngIf="question.selectedValue == question.correctAnswer && question.selectedValue == answer.displayNumber">
+                      <input type="radio" checked disabled>
+                      <i class="correct-answer" ></i>
+                    </label>
+                    <label class="rad"
+                           *ngIf="question.selectedValue != question.correctAnswer && question.correctAnswer == answer.displayNumber">
+                      <input type="radio" checked disabled>
+                      <i class="wrong-answer"></i>
+                    </label>
+
+                    <label class="rad"
+                           *ngIf="question.selectedValue != question.correctAnswer &&
+                                  question.selectedValue == answer.displayNumber">
+                      <input type="radio" checked disabled>
+                      <i class="user-answer"></i>
+                    </label>
+
+                    <label class="rad"
+                           *ngIf="answer.displayNumber != question.selectedValue && answer.displayNumber != question.correctAnswer">
+                      <input type="radio" disabled>
+                      <i></i>
+                    </label>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <ul class="ft-fix">
+          <li class="nopbai-btn">
+            <button type="button" id="nop-bai" class="white-btn" data-toggle="modal" data-target="#examDone"><i class="material-icons">publish</i></button>
+            <button type="submit" name="btnsub" id="apply_sub" style="display:none"><i class="material-icons">publish</i></button>
+          </li>
+          <li class="result-tbl"><i class="material-icons">list_alt</i></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>

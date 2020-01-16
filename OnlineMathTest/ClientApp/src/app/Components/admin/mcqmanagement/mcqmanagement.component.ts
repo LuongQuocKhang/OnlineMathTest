@@ -49,4 +49,19 @@ export class McqManagementComponent implements OnInit {
       });
     }
   }
+  public editMcq(Id: any) {
+    this.router.navigate(['/adminpage/mcq/edit', Id]);
+  }
+  public deleteMcq(mcq: any) {
+    this.http.post('/adminpage/mcq/deletemcq', mcq)
+      .subscribe((response: any) => {
+        if (response.success) {
+          this.sharedService.show('Xóa thành công', 'SUCCESS');
+          this.getAllMCQ();
+        }
+        else {
+          this.sharedService.show('Xóa không thành công', 'ERROR');
+        }
+      })
+  }
 }

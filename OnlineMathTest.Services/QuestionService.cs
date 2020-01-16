@@ -56,6 +56,19 @@ namespace OnlineMathTest.Services
             return result.Skip(model.start).Take(model.length).ToList();
         }
 
+        public List<QuestionViewModel> GetAllQuestion()
+        {
+            var questions = _unitOfWork.Repository<Question>().Where(x => !x.IsDeleted.Value).ToList();
+            var result = _mapper.Map<List<QuestionViewModel>>(questions);
+            foreach (var questionvm in result)
+            {
+                var answer = _unitOfWork.Repository<QuestionAnswer>().Where(x => x.QuestionId == questionvm.Id).ToList();
+                var answervm = _mapper.Map<List<QuestionAnswerViewModel>>(answer);
+                questionvm.Answers = answervm;
+            }
+            return result;
+        }
+
         public QuestionViewModel GetQuestionById(int Id)
         {
             var question = _unitOfWork.Repository<Question>().FirstOrDefault(x => x.Id == Id);

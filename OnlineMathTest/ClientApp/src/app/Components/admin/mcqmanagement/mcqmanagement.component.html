@@ -41,11 +41,11 @@
               <span *ngIf="item.levelType == 3">Dễ</span>
             </td>
             <td>
-              <a class="btn btn-primary btn-sm " href="javascript:;">
-                <span class="fa fa-pencil"> </span>" 
-              </a>
-              <a class="btn btn-danger btn-sm " href="javascript:;" style="margin-left: 5px;">
-                <span class="fa fa-trash-o"> </span>
+              <!--<a class="btn btn-primary btn-sm" href="javascript:;" (click)="editMcq(item.id)">
+                <span class="fa fa-pencil"></span>
+              </a>-->
+              <a class="btn btn-danger btn-sm" href="javascript:;" style="margin-left: 5px;" (click)="deleteMcq(item)">
+                <span class="fa fa-trash-o"></span>
               </a>
             </td>
           </tr>

@@ -42,10 +42,11 @@ export class LoginFormComponent implements OnInit {
             if (response.success) {
               let user = response.data;
               if (this.isAdmin(user)) {
-                this.router.navigate(['/dashboard']);
+                this.router.navigate(['']);
+                window.location.href = '/dashboard';
               }
               this.sharedService.getCurrentUser();
-              this.router.navigate([this.returnUrl]);
+              window.location.href = this.returnUrl;
             }
           },
           error => {

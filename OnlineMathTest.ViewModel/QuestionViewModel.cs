@@ -14,9 +14,10 @@ namespace OnlineMathTest.ViewModel
         public int? LevelType { get; set; }
         public int CorrectAnswer { get; set; }
         public string Guide { get; set; }
-        public DateTime? CreateOn { get; set; }
-        public bool? IsDeleted { get; set; }
-        public string SelectedValue { get; set; }
+        public DateTime? CreateOn { get; set; } = DateTime.Now;
+        public bool? IsDeleted { get; set; } = false;
+        public int SelectedValue { get; set; }
+        public bool IsSelected { get; set; }
         public string ImageLink { get; set; }
         public List<QuestionAnswerViewModel> Answers { get; set; }
     }

@@ -12,8 +12,8 @@ namespace OnlineMathTest.ViewModel
         public int? Duration { get; set; }
         public string Type { get; set; }
         public int? LevelType { get; set; }
-        public DateTime? CreateOn { get; set; }
-        public bool? IsDeleted { get; set; }
+        public DateTime? CreateOn { get; set; } = DateTime.Now;
+        public bool? IsDeleted { get; set; } = false;
         public int? Views { get; set; }
         public int? Attempts { get; set; }
         public string ExamType { get; set; }

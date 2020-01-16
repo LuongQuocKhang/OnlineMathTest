@@ -5,11 +5,11 @@ import { HttpClient } from "@angular/common/http";
 
 declare var $: any;
 @Component({
-  selector: 'app-exam',
-  templateUrl: './exam.component.html',
-  styleUrls: ['./exam.component.css']
+  selector: 'app-exam-result',
+  templateUrl: './exam.result.component.html',
+  styleUrls: ['./exam.result.component.css']
 })
-export class ExamComponent implements OnInit {
+export class ExamResultComponent implements OnInit {
   private sub: any;
   public model = {} as any;
   public mcqId = 0 as any;
@@ -25,24 +25,13 @@ export class ExamComponent implements OnInit {
 
   }
   public getMCQById() {
-    this.http.get('/MCQ/GetMCQById?id=' + this.mcqId).subscribe(
+    this.http.get('/MCQ/GetExamResultById?id=' + this.mcqId).subscribe(
       (response: any) => {
         this.model = response.data;
       })
   }
   ngAfterViewInt() {
-    
+
   }
-  public submitExam() {
-    console.log(this.model);
-    this.http.post('/mcq/submitExam', this.model)
-      .subscribe((response: any) => {
-        if (response.success) {
-          this.sharedService.show('Nộp bài thành công', 'SUCCESS');
-        }
-        else {
-          this.sharedService.show('Nộp bài không thành công', 'ERRO');
-        }
-      })
-  }
+ 
 }

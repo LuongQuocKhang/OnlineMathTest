@@ -30,7 +30,6 @@ export class McqDetailComponent implements OnInit {
   }
 
   public takeExam() {
-    //this.router.navigate(['/exam/', this.mcqId]);
-    window.location.href = '/exam/' + this.mcqId;
+    window.location.href = 'r' + '/#/mcq/exam/' + this.mcqId;
   }
 }

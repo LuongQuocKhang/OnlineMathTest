@@ -60,6 +60,7 @@ namespace OnlineMathTest.Services
             var role = _unitOfWork.Repository<Model.Role>().FirstOrDefault(x => x.Id == user.RoleId);
             var result = new UserReturnViewModel()
             {
+                Id = user.Id.ToString(),
                 UserName = user.Username,
                 Role = role.RoleName
             };

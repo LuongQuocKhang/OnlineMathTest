@@ -82,7 +82,8 @@ export class MathJaxModule {
             },
             ".MathJax_Display": {
               "width": "fit-content",
-              "margin": "0"
+              "margin": "0",
+              "display": "-webkit-inline-box!important;"
             },
             ".MJXc-display": {
               "color" : "black !important",

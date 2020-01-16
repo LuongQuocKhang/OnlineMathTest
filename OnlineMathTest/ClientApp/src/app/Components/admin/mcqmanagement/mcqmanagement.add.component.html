@@ -11,13 +11,105 @@
       <h4 class="mg-b-0 tx-spacing--1"> Đề thi </h4>
     </div>
     <div class="d-none d-md-block">
+      <a class="btn pd-x-15 btn-primary btn-uppercase mg-l-5" style="margin-right: 10px"
+         href="javascript:;" (click)="addQuestion()"><i data-feather="plus" class="wd-10 mg-r-5"></i> Thêm câu hỏi </a>
       <a class="btn pd-x-15 btn-primary btn-uppercase mg-l-5"
-         href="javascript:;" [routerLink]="['/adminpage/mcq/add']"><i data-feather="plus" class="wd-10 mg-r-5"></i> Thêm mới </a>
+         href="javascript:;" (click)="saveMcq()"><i data-feather="plus" class="wd-10 mg-r-5"></i> Lưu </a>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
-     
+      <form action="/" method="post">
+        <div class="form-group">
+          <label for="title"> Tên đề thi </label>
+          <input class="form-control" type="text" name="title" [(ngModel)]="mcq.title" [ngModelOptions]="{standalone: true}" />
+        </div>
+        <div class="form-group">
+          <label for="numberOfQuestion"> Số lượng câu hỏi </label>
+          <input class="form-control" type="text" name="numberOfQuestion" [(ngModel)]="mcq.numberOfQuestion" [ngModelOptions]="{standalone: true}" />
+        </div>
+        <div class="form-group">
+          <label for="duration"> Thời gian </label>
+          <input class="form-control" type="text" name="duration" [(ngModel)]="mcq.duration" [ngModelOptions]="{standalone: true}" />
+        </div>
+        <div class="form-group">
+          <label for="type"> Loại đề thi </label>
+          <input class="form-control" type="text" name="type" [(ngModel)]="mcq.type" [ngModelOptions]="{standalone: true}" />
+        </div>
+        <div class="form-group">
+          <label for="level"> Độ khó </label>
+          <select class="form-control" type="text" name="level" [(ngModel)]="mcq.levelType" [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let q of levels" [ngValue]="q.id">{{q.levelName}}</option>
+          </select>
+        </div>
+      </form>
+      <h4> Danh sách câu hỏi </h4>
+      <div>
+        <div class="question"
+             style="float: left;display: -webkit-inline-box;"
+             *ngFor='let question of mcqquestions; let i = index; let last = last'>
+          <p class="Answer-title bold" [id]="question.id">
+            <strong> Câu {{i + 1}} : </strong>
+          </p>
+          <p class="Answer-style title choice" mathjax>
+            {{question.title}}
+          </p>
+
+          <div style="display: contents;">
+            <div class="Answer-image" *ngFor='let answer of question.answers'>
+              <b class="Answer"> {{answer.choice}}: </b>
+              <span class="answer-display" mathjax>{{answer.answer}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+<div class="modal fade"
+     id="AddQuestionModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="DocumentModal"
+     aria-hidden="true"
+     data-backdrop="false"
+     style="z-index: 9996;">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Thêm câu hỏi</h4>
+        <img class="close-modal" style="margin-top: 7px;width: 15px;" src="/images/exit.png" data-dismiss="modal" />
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12" style="height: auto;">
+            <table class="table table-bordered" id="documentAddTable" style="overflow-x: visible;">
+              <thead>
+                <tr>
+                  <th> Tên câu hỏi </th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor='let item of questions'>
+                  <td> {{item.title}} </td>
+                  <td class="checkbox-center">
+                    <label class="mt-checkbox">
+                      <input type="checkbox" [(ngModel)]="item.isSelected" name="service">
+                      <span></span>
+                    </label>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addQuestionToList()">Chọn </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng lại</button>
+      </div>
+    </div>
+  </div>
+</div>
+

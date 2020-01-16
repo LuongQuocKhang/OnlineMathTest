@@ -26,7 +26,7 @@ import { EditUserManagementComponent } from '../Components/admin/user/usermanage
   ],
   imports: [
     ModuleShared,
-    RouterModule.forChild([
+    RouterModule.forRoot([
       { path: 'adminpage/mcq', component: McqManagementComponent, canActivate: [AdminAuthGuardService] },
       { path: 'adminpage/mcq/add', component: AddMcqManagementComponent, canActivate: [AdminAuthGuardService] },
       { path: 'adminpage/mcq/edit/:id', component: EditMcqManagementComponent, canActivate: [AdminAuthGuardService] },

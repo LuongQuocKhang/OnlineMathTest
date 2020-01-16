@@ -14,8 +14,8 @@ namespace OnlineMathTest.ViewModel
         public string Password { get; set; }
         public string comfirmPassword { get; set; }
         public string Type { get; set; }
-        public DateTime? CreateOn { get; set; }
-        public bool? IsDeleted { get; set; }
+        public DateTime? CreateOn { get; set; } = DateTime.Now;
+        public bool? IsDeleted { get; set; } = false;
         public string ReturnUrl { get; set; }
         public bool RememberMe { get; set; }
     }
