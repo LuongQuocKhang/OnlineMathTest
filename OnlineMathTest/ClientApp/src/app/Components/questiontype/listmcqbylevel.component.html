@@ -2,21 +2,6 @@
   <header class="pricing-header">
     <h2> Danh sách đề thi </h2>
   </header>
-  <form *ngIf="!sharedService.isAdmin()"
-        action=""
-        style="width: 50%;margin: 0 auto;">
-    <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4"
-         style="margin-bottom: 0px !important;">
-      <div class="input-group">
-        <input type="search" placeholder="Tìm kiếm" id="searchQuery" aria-describedby="button-addon1" class="form-control border-0 bg-light">
-        <div class="input-group-append">
-          <button id="button-addon1" type="button" class="btn btn-link text-primary" (click)="search()">
-            <i class="fa fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </form>
   <ul class="pricing-list bounce-invert">
     <li class="exclusive" *ngFor='let item of mcqs; let i = index; let last = last'>
       <ul class="pricing-wrapper">

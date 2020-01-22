@@ -76,6 +76,7 @@ namespace OnlineMathTest
             services.AddScoped<IMCQService, MCQService>();
             services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IStatisticsService, StatisticsService>();
         }
         public void ConfigureRepository(IServiceCollection services)
         {
@@ -110,6 +111,9 @@ namespace OnlineMathTest
 
                 cfg.CreateMap<User, UserReturnViewModel>();
                 cfg.CreateMap<UserReturnViewModel, User>();
+
+                cfg.CreateMap<UserTest, UserTestViewModel>();
+                cfg.CreateMap<UserTestViewModel, UserTest>();
             });
             var mapper = config.CreateMapper();
             services.AddSingleton(mapper);

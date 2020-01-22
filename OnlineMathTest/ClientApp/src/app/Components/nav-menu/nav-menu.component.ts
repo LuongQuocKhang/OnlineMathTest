@@ -15,6 +15,8 @@ export class NavMenuComponent {
     $(document).click(function (event) {
       $('.dropdown-menu').css("display", 'none');
     });
+
+   
   }
   collapse() {
     this.isExpanded = false;
@@ -29,6 +31,14 @@ export class NavMenuComponent {
 
   public logout() {
     this.authenticationService.logout();
-    this.router.navigate(['/']);
+    window.location.href = '/';
+  }
+
+  public userProfile() {
+    this.router.navigate(['/profile/', this.sharedService.currentUser.id]);
+  }
+
+  public stastistics() {
+    this.router.navigate(['/statistic/', this.sharedService.currentUser.id]);
   }
 }

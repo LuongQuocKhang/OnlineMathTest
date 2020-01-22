@@ -22,7 +22,7 @@ export class QuestiontypeComponent implements OnInit {
         this.questiontypes = response.data;
       })
   }
-  public viewAllQuestion(id: any) {
-
+  public viewAllMcq(id: any) {
+    this.router.navigate(['/mcq/listmcqbyquestion',id]);
   }
 }

@@ -14,8 +14,9 @@
           </p>
           <p class="Answer-style title choice" mathjax>
             {{question.title}}
+            <img *ngIf="question.imageLink"
+                 [src]="question.imageLink" alt="Alternate Text" style="display: block;" />
           </p>
-
           <div style="display: contents;">
             <div class="Answer-image" *ngFor='let answer of question.answers'>
               <label class="rad"
@@ -58,6 +59,12 @@
     </div>
     <div class="vk-quest__sidebar vk-sidebar--quest">
       <div class="vk-sidebar__box vk-sidebar__box--rounded">
+        <div class="vk-time">
+          <h3 class="vk-time__title">Điểm bài thi</h3>
+          <div class="countDown" data-time-init="5399" style="height: auto;">
+            <span id="score">{{usertest.point}}</span>
+          </div>
+        </div>
         <div class="vk-answer">
           <h3 class="vk-answer__title">ĐÁP ÁN ĐÃ CHỌN</h3>
           <div class="vk-table__wrapper">
@@ -78,7 +85,7 @@
                     <label class="rad"
                            *ngIf="question.selectedValue == question.correctAnswer && question.selectedValue == answer.displayNumber">
                       <input type="radio" checked disabled>
-                      <i class="correct-answer" ></i>
+                      <i class="correct-answer"></i>
                     </label>
                     <label class="rad"
                            *ngIf="question.selectedValue != question.correctAnswer && question.correctAnswer == answer.displayNumber">

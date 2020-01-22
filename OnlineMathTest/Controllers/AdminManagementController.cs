@@ -255,13 +255,13 @@ namespace OnlineMathTest.Controllers
         } 
         [Route("/adminpage/usermanagement/getUserById")]
         [HttpGet]
-        public IActionResult GetUserById(string Id)
+        public IActionResult GetUserById(int Id)
         {
             ResponseViewModel response = new ResponseViewModel();
             try
             {
                 response.success = true;
-                response.data = _userService.GetUserById(Id);
+                response.data = _userService.GetUserById(Id.ToString());
             }
             catch (Exception e)
             {

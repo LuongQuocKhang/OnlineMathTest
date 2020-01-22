@@ -32,7 +32,22 @@ namespace OnlineMathTest.Controllers
             try
             {
                 response.success = true;
-                response.data = _mcqService.GetAllMCQ(EnumSettings.DefaultPageSize,EnumSettings.DefaultPageLength);
+                response.data = _mcqService.GetAllMCQ();
+            }
+            catch (Exception ex)
+            {
+                response.errMsg = ex.ToString();
+            }
+            return Json(response);
+        }
+        [HttpPost]
+        public IActionResult Search(SearchViewModel searchQuery)
+        {
+            ResponseViewModel response = new ResponseViewModel();
+            try
+            {
+                response.success = true;
+                response.data = _mcqService.GetAllMCQ(searchQuery);
             }
             catch (Exception ex)
             {
@@ -69,7 +84,37 @@ namespace OnlineMathTest.Controllers
                 response.errMsg = ex.ToString();
             }
             return Json(response);
-        } 
+        }
+        [HttpGet]
+        public IActionResult GetAllMcqByQuestionType(int id)
+        {
+            ResponseViewModel response = new ResponseViewModel();
+            try
+            {
+                response.success = true;
+                response.data = _mcqService.GetAllMcqByQuestionType(id);
+            }
+            catch (Exception ex)
+            {
+                response.errMsg = ex.ToString();
+            }
+            return Json(response);
+        }
+        [HttpGet]
+        public IActionResult GetAllMcqByLevel(int id)
+        {
+            ResponseViewModel response = new ResponseViewModel();
+            try
+            {
+                response.success = true;
+                response.data = _mcqService.GetAllMcqByLevel(id);
+            }
+            catch (Exception ex)
+            {
+                response.errMsg = ex.ToString();
+            }
+            return Json(response);
+        }
         [HttpGet]
         public IActionResult GetExamResultById(int Id)
         {
@@ -96,6 +141,23 @@ namespace OnlineMathTest.Controllers
                 var _user = _userService.GetUserByUserName(user.UserName);
                 response.success = true;
                 response.data = _mcqService.SubmitExam(mcq, Int32.Parse(_user.Id));
+            }
+            catch (Exception ex)
+            {
+                response.success = false;
+                response.errMsg = ex.ToString();
+            }
+            return Json(response);
+        }
+
+        [HttpGet]
+        public IActionResult GetUsetTest(int userTestId)
+        {
+            ResponseViewModel response = new ResponseViewModel();
+            try
+            {
+                response.success = true;
+                response.data = _mcqService.GetUsetTest(userTestId);
             }
             catch (Exception ex)
             {

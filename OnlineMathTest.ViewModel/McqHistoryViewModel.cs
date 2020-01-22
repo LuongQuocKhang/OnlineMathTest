@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OnlineMathTest.ViewModel
 {
-    class McqHistoryViewModel
+    public class McqHistoryViewModel
     {
         public int Id { get; set; }
         public int Mcqid { get; set; }

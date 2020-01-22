@@ -33,4 +33,11 @@ export class HomeComponent implements OnInit {
   public viewMore() {
     this.router.navigate(['/mcq/listmcq/']);
   }
+
+  public viewAllMcq(id: any) {
+    this.router.navigate(['/mcq/listmcqbyquestion', id]);
+  }
+  public viewAllMcqByLevel(id: any) {
+    this.router.navigate(['/mcq/listmcqbylevel', id]);
+  }
 }

@@ -1,0 +1,58 @@
+<div class="container pd-x-0 pd-lg-x-10 pd-xl-x-0">
+  <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-30">
+    <div style="width: 50%;">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-style1 mg-b-10">
+          <li class="breadcrumb-item"><a [routerLink]="['/']"> Trang chủ </a></li>
+          <li class="breadcrumb-item"> Thống kê </li>
+        </ol>
+      </nav>
+      <h4 class="mg-b-0 tx-spacing--1"> Thống kê kết quả học tập </h4>
+    </div>
+    <!--<div class="d-none d-md-block">
+      <a class="btn pd-x-15 btn-primary btn-uppercase mg-l-5"
+         href="javascript:;" (click)="updateUser()"><i data-feather="plus" class="wd-10 mg-r-5"></i> Lưu </a>
+    </div>-->
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div *ngIf="isLoaded">
+        <div style="display: block">
+          <canvas baseChart
+                  [datasets]="barChartData"
+                  [labels]="barChartLabels"
+                  [options]="barChartOptions"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType">
+          </canvas>
+        </div>
+      </div>
+
+      <h4> Danh sách các bài đã làm </h4>
+      <table class="table table-bordered table-general" id="tblDatatable" style="margin: 0 !important">
+        <thead>
+          <tr>
+            <td> # </td>
+            <td> Tên bài thi </td>
+            <td> Điểm số </td>
+            <td> Ngày tạo </td>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr *ngFor="let item of userTests; let i = index">
+            <td> {{i + 1}}</td>
+            <td> {{item.mcqTitle}} </td>
+            <td> {{item.point}} </td>
+            <td> {{item.createdOn}} </td>
+            <td>
+              <button class="btn btn-primary" (click)="viewDetail(item.id)"> Xem</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

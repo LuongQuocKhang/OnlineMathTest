@@ -1,4 +1,5 @@
 ﻿using OnlineMathTest.Model;
+using OnlineMathTest.Models.Models;
 using OnlineMathTest.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,7 @@ namespace OnlineMathTest.Interfaces
 
         bool UpdateUser(UserReturnViewModel user);
         bool DeleteUser(UserReturnViewModel user);
+
+        List<UserTestViewModel> GetAllUserTest(int userId);
     }
 }

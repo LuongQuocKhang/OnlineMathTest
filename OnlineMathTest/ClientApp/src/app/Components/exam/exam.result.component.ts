@@ -13,12 +13,15 @@ export class ExamResultComponent implements OnInit {
   private sub: any;
   public model = {} as any;
   public mcqId = 0 as any;
+  public usertest = {} as any;
+
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute,
     private sharedService: SharedService) {
     this.sub = this.route.params.subscribe(params => {
       this.mcqId = params['id'];
     });
     this.getMCQById();
+    this.getUserTest();
   }
 
   ngOnInit() {
@@ -28,6 +31,13 @@ export class ExamResultComponent implements OnInit {
     this.http.get('/MCQ/GetExamResultById?id=' + this.mcqId).subscribe(
       (response: any) => {
         this.model = response.data;
+      })
+  }
+  public getUserTest() {
+    this.http.get('/MCQ/GetUsetTest?userTestId=' + this.mcqId).subscribe(
+      (response: any) => {
+        this.usertest = response.data;
+        this.usertest.point = parseFloat(this.usertest.point).toFixed(2);
       })
   }
   ngAfterViewInt() {

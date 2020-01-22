@@ -16,13 +16,14 @@
             {{question.title}}
           </p>
 
-          <div style="display: contents;">
+          <div style="display: contents;" >
             <div class="Answer-image" *ngFor='let answer of question.answers'>
               <input type="radio"
                      id="{{answer.id}}"
                      [(ngModel)]="question.selectedValue" [ngModelOptions]="{standalone: true}"
                      [value]="answer.displayNumber"
-                     [name]="answer.questionId">
+                     [name]="answer.questionId"
+                     [disabled]="isEnd">
               <b class="Answer"> {{answer.choice}}: </b>
               <span class="answer-display" mathjax>{{answer.answer}}</span>
             </div>
@@ -34,11 +35,10 @@
       <div class="vk-sidebar__box">
         <div class="vk-time">
           <h3 class="vk-time__title">Thời gian làm bài</h3>
-          <div class="countDown" data-time-init="5399" style="height: auto;">
-            <span id="min">88</span>
-            <span>:</span>
-            <span id="sec">50</span>
-          </div>
+          <countdown #cd
+                     style="font-size: 30px;color: red;"
+                     [config]="config"
+                     (event)="handleEvent($event)"></countdown>
         </div>
         <section class="nop-bai">
           <button type="button" id="nop-bai" class="vk-btn vk-btn--block vk-btn--blue-4 rounded"
@@ -74,7 +74,8 @@
                            id="{{answer.id}}"
                            [(ngModel)]="question.selectedValue" [ngModelOptions]="{standalone: true}"
                            [value]="answer.displayNumber"
-                           [name]="answer.questionId">
+                           [name]="answer.questionId"
+                           [disabled]="isEnd">
                   </td>
                 </tr>
               </tbody>
@@ -91,5 +92,4 @@
       </div>
     </div>
   </div>
- 
 </div>

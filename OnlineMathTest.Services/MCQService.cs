@@ -56,14 +56,36 @@ namespace OnlineMathTest.Services
             return result;
         }
 
-        public List<MCQViewModel> GetAllMCQ(int pageLength = 0, int pageSize = 10)
+        public List<MCQViewModel> GetAllMCQ()
         {
             var mcq = _unitOfWork.Repository<Mcq>().Where(x => !x.IsDeleted.Value)
-                .OrderBy(x => x.CreateOn).Skip(pageLength).Take(pageSize);
+                .OrderBy(x => x.CreateOn);
+            var mcqvm = _mapper.Map<List<MCQViewModel>>(mcq.ToList());
+            return mcqvm;
+        }
+        public List<MCQViewModel> GetAllMCQ(SearchViewModel searchQuery)
+        {
+            var mcq = _unitOfWork.Repository<Mcq>().Where(x => !x.IsDeleted.Value 
+            && RemoveUnicode.RemoveSign4VietnameseString(x.Title).Contains(searchQuery.Key))
+                .OrderBy(x => x.CreateOn);
             var mcqvm = _mapper.Map<List<MCQViewModel>>(mcq.ToList());
             return mcqvm;
         }
 
+        public List<MCQViewModel> GetAllMcqByQuestionType(int id)
+        {
+            var questions = _unitOfWork.Repository<Question>().Where(x => x.QuestionType.Value == id);
+            var mcqQuestion = _unitOfWork.Repository<Mcqquestion>().Where(x => questions.Select(t => t.Id).Contains(x.QuestionId)).Select(t => t.McqquestionId);
+            var mcq = _unitOfWork.Repository<Mcq>().Where(x => mcqQuestion.Contains(x.Id));
+            var result = _mapper.Map<List<MCQViewModel>>(mcq);
+            return result;
+        }
+        public List<MCQViewModel> GetAllMcqByLevel(int id)
+        {
+            var mcq = _unitOfWork.Repository<Mcq>().Where(x => x.LevelType == id);
+            var result = _mapper.Map<List<MCQViewModel>>(mcq);
+            return result;
+        }
         public List<QuestionTypeViewModel> GetAllQuestionType()
         {
             var questiontype = _unitOfWork.Repository<QuestionType>().ToList();
@@ -106,7 +128,10 @@ namespace OnlineMathTest.Services
 
         public MCQViewModel GetMCQById(int Id)
         {
-            var mcq = _unitOfWork.Repository<Mcq>().FirstOrDefault(x => x.Id == Id);
+            var mcq = _unitOfWork.Repository<Mcq>().FirstOrDefault(x => x.Id == Id && !x.IsDeleted.Value);
+            mcq.Views += 1;
+            _unitOfWork.SaveChanges();
+
             var mvqvm = _mapper.Map<MCQViewModel>(mcq);
             var mcqquestions = _unitOfWork.Repository<Mcqquestion>().Where(x => x.McqquestionId == mcq.Id);
             var questions = _unitOfWork.Repository<Question>().Where(x => mcqquestions.Select(t => t.QuestionId).Contains(x.Id));
@@ -134,9 +159,11 @@ namespace OnlineMathTest.Services
             return result;
         }
 
-        public MCQVHistoryViewModel GetMCQHistory(int Id)
+        public UserTestViewModel GetUsetTest(int Id)
         {
-            throw new NotImplementedException();
+            var usertest = _unitOfWork.Repository<UserTest>().FirstOrDefault(x => x.Id == Id);
+            var result = _mapper.Map<UserTestViewModel>(usertest);
+            return result;
         }
 
         public int SubmitExam(MCQViewModel mcq,int userId)
@@ -152,6 +179,8 @@ namespace OnlineMathTest.Services
             
             _unitOfWork.Repository<UserTest>().Add(mcqTest);
             _unitOfWork.SaveChanges();
+            var _mcq = _unitOfWork.Repository<Mcq>().FirstOrDefault(x => x.Id == mcq.Id);
+            _mcq.Attempts += 1;
             foreach (var question in mcq.Questions)
             {
                 var mcqhistory = new Mcqhistory()

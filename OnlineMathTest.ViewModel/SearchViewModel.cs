@@ -4,7 +4,8 @@ using System.Text;
 
 namespace OnlineMathTest.ViewModel
 {
-    public class MCQVHistoryViewModel
+    public class SearchViewModel
     {
+        public string Key { get; set; }
     }
 }

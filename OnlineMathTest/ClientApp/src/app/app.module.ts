@@ -1,4 +1,4 @@
-/// <reference path="services/math-jax.service.ts" />
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -12,19 +12,16 @@ import { RegisterFormComponent } from './Components/register-form/register-form.
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { SharedService } from './Services/sharedService';
-
 import { AuthenticationService } from './Services/AuthenticationService';
 import { JwtInterceptor } from './Interceptors/JwtInterceptor';
-import { DasboardComponent } from './Components/dasboard/dasboard.component';
+
 import { AdminAuthGuardService } from './Services/AdminAuthGuardService';
 import { QuestiontypeComponent } from './Components/questiontype/questiontype.component';
 import { UserComponent } from './Components/user/user.component';
 import { AdminModule } from './Modules/admin.module';
-import { MathJaxModule } from './Modules/math-jax.module';
-import { MathJaxService } from './services/math-jax.service';
-import { AuthGuardService } from './Services/AuthGuardService';
+import { StatisticModule } from './Modules/statistic.module';
 import { MCQModule } from './Modules/mcq.module';
-
+import { DashBoardModule } from './Modules/dashboard.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,9 +29,8 @@ import { MCQModule } from './Modules/mcq.module';
     NavMenuComponent,
     LoginFormComponent,
     RegisterFormComponent,
-    DasboardComponent,
     QuestiontypeComponent,
-    UserComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -42,18 +38,20 @@ import { MCQModule } from './Modules/mcq.module';
     HttpClientModule,
     AdminModule,
     MCQModule,
+    StatisticModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'mcq', loadChildren: './Modules/mcq.module#MCQModule' },
       { path: 'questiontype', component: QuestiontypeComponent },
-      { path: 'user', component: UserComponent },
+      { path: 'profile/:id', component: UserComponent },
+      { path: 'statistic', loadChildren: './Modules/statistic.module#StatisticModule' },
       { path: 'login', component: LoginFormComponent },
       { path: 'register', component: RegisterFormComponent },
-      { path: 'dashboard', component: DasboardComponent, canActivate: [AdminAuthGuardService] },
+      { path: 'dashboard', loadChildren: './Modules/dashboard.module#DashBoardModule', canActivate: [AdminAuthGuardService] },
       { path: 'adminpage', loadChildren: './Modules/admin.module#AdminModule', canActivate: [AdminAuthGuardService] },
       { path: '**', component: HomeComponent },
     ], { useHash: true }),
- 
+    DashBoardModule
   ],
   providers: [
     SharedService,

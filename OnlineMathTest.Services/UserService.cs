@@ -25,6 +25,7 @@ namespace OnlineMathTest.Services
             try
             {
                 var _user = _mapper.Map<User>(user);
+                _user.Password = MD5Encryptor.EncryptData(user.Password);
                 _unitOfWork.Repository<User>().Add(_user);
 
                 _user.RoleId = (int)Common.Role.USER;
@@ -62,8 +63,10 @@ namespace OnlineMathTest.Services
             {
                 Id = user.Id.ToString(),
                 UserName = user.Username,
-                Role = role.RoleName
+                Role = role.RoleName,
+                roleId = role.Id
             };
+            _mapper.Map(user, result);
             return result;
         }
 
@@ -80,6 +83,13 @@ namespace OnlineMathTest.Services
             _user.IsDeleted = true;
             _unitOfWork.SaveChanges();
             return true;
+        }
+
+        public List<UserTestViewModel> GetAllUserTest(int userId)
+        {
+            var userTest = _unitOfWork.Repository<UserTest>().Where(x => x.UserId == userId);
+            var result = _mapper.Map<List<UserTestViewModel>>(userTest);
+            return result;
         }
     }
 }

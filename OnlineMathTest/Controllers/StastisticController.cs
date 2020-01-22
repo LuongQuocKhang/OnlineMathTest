@@ -9,12 +9,14 @@ using OnlineMathTest.ViewModel;
 
 namespace OnlineMathTest.Controllers
 {
-    public class UserController : Controller
+    public class StastisticController : Controller
     {
         private readonly IUserService _userService;
         private readonly UserManager<IdentityUser> _userManager;
-        public UserController(IUserService userService, UserManager<IdentityUser> userManager)
+        private readonly IStatisticsService _stastisticService;
+        public StastisticController(IStatisticsService stastisticService,IUserService userService, UserManager<IdentityUser> userManager)
         {
+            _stastisticService = stastisticService;
             _userService = userService;
             _userManager = userManager;
         }
@@ -23,31 +25,33 @@ namespace OnlineMathTest.Controllers
             return View();
         }
 
-        public IActionResult GetUserProfileById(string Id)
+        public IActionResult GetStastistics(string userId)
         {
             ResponseViewModel response = new ResponseViewModel();
             try
             {
                 response.success = true;
-                var _user = _userManager.FindByIdAsync(Id).Result;
-                response.data = _userService.GetUserByUserName(_user.UserName);
+                var _user = _userManager.FindByIdAsync(userId).Result;
+                var user = _userService.GetUserByUserName(_user.UserName);
+                response.data = _stastisticService.getStastistic(Int32.Parse(user.Id));
             }
-            catch (Exception e) 
+            catch(Exception e)
             {
                 response.success = false;
                 response.errMsg = e.ToString();
             }
-
             return Json(response);
         }
         [HttpGet]
-        public IActionResult GetRoles()
+        public IActionResult GetAllUserTest(string UserId)
         {
             ResponseViewModel response = new ResponseViewModel();
             try
             {
+                var _user = _userManager.FindByIdAsync(UserId).Result;
+                var user = _userService.GetUserByUserName(_user.UserName);
+                response.data = _stastisticService.GetAllUserTest(Int32.Parse(user.Id));
                 response.success = true;
-                response.data = _userService.GetRoles();
             }
             catch (Exception e)
             {
@@ -56,26 +60,5 @@ namespace OnlineMathTest.Controllers
             }
             return Json(response);
         }
-
-        [HttpPost]
-        public IActionResult UpdateUser([FromBody]UserReturnViewModel user)
-        {
-            ResponseViewModel response = new ResponseViewModel();
-            try
-            {
-                var _user = _userManager.FindByNameAsync(user.UserName).Result;
-                _user.Email = user.Email;
-                _user.NormalizedEmail = user.Email.ToUpper();
-                _userManager.UpdateAsync(_user);
-                response.success = _userService.UpdateUser(user);
-            }
-            catch (Exception e)
-            {
-                response.success = false;
-                response.errMsg = e.ToString();
-            }
-            return Json(response);
-        }
-        
     }
 }

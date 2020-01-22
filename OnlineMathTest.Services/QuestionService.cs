@@ -26,6 +26,10 @@ namespace OnlineMathTest.Services
             {
                 var question = _mapper.Map<Question>(questionvm);
                 _unitOfWork.Repository<Question>().Add(question);
+                if ( question.ImageLink != null)
+                {
+                    question.ImageLink = "/images/" + question.ImageLink;
+                }
                 _unitOfWork.SaveChanges();
                 foreach (var answervm in questionvm.Answers)
                 {

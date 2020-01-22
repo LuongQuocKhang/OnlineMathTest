@@ -1,0 +1,114 @@
+
+<div id="content-wrapper" class="d-flex flex-column">
+
+  <!-- Main Content -->
+  <div id="content">
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+      <!-- Page Heading -->
+      <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fa fa-download fa-sm text-white-50"></i> Generate Report</a>
+      </div>
+
+      <!-- Content Row -->
+      <div class="row">
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Người dùng</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800" style="text-align: center;">{{report.users}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Tổng lượt thi</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800" style="text-align: center;">{{report.attemps}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Số lượng đề thi</div>
+                  <div class="row no-gutters align-items-center">
+                    <div class="col-auto" style="text-align: center;">
+                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{report.mcqs}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-1">
+                  <div class="text-xs font-weight-bold text-warning text-uppercase mb-1" style="padding: 0;">Điểm trung bình</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800" style="margin: 0 auto;">{{report.averagePoint}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card border-left-primary shadow h-100 py-2" style="width: 100%">
+        <div class="card-body" style="width: 100%">
+          <div class="row no-gutters">
+            <input type="text" ngxDaterangepickerMd id="form_control_1" class="ng-untouched ng-valid ng-dirty"
+                   [(ngModel)]="Exam"
+                   [locale]="locale"
+                   [ranges]="ranges"
+                   [linkedCalendars]="true"
+                   [alwaysShowCalendars]="true"
+                   name="daterange"
+                   startKey="startDate"
+                   endKey="endDate"
+                   [ngModelOptions]="{standalone: true}"
+                   (datesUpdated)="getAllUserTest()"
+                   style="border: 0;line-height: 26px;width: 160px" readonly>
+
+
+          </div>
+          <div *ngIf="isLoaded">
+            <div class="chart">
+              <canvas baseChart
+                      [datasets]="barChartData"
+                      [labels]="barChartLabels"
+                      [options]="barChartOptions"
+                      [legend]="barChartLegend"
+                      [chartType]="barChartType">
+              </canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

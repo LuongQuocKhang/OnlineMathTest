@@ -24,13 +24,17 @@ export class AuthenticationService {
   }
   public register(model: any) {
     return this.http.post('/account/register', model, model)
-      .map((user: any) => {
-        this.login(model);
+      .subscribe((response: any) => {
+        if (response.success) {
+          this.login(model);
+        }
+        else {
+          this.sharedService.show('Đăng ký không thành công', 'ERROR');
+        }
       });
   }
   logout() {
     localStorage.removeItem('currentUser');
     this.sharedService.getCurrentUser();
-
   }
 }

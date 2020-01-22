@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineMathTest.Interfaces;
 using OnlineMathTest.Models.Models;
+using OnlineMathTest.Services;
 using OnlineMathTest.ViewModel;
 
 namespace OnlineMathTest.Controllers
@@ -52,7 +53,7 @@ namespace OnlineMathTest.Controllers
             {
                 ViewData["ReturnUrl"] = model.ReturnUrl;
                 if (ModelState.IsValid)
-                {
+                {    
                     var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
                     if (result.Succeeded)
                     {

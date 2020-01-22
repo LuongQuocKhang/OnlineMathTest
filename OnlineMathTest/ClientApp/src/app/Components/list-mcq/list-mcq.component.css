@@ -801,3 +801,19 @@ a {
 .margin-0 {
   margin: 0 auto !important;
 }
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate(0, 0);
+}
+.fa-search:before {
+  content: '\e802';
+}
+
+.fa-search:before {
+  content: "\f002";
+}

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedService } from "../../Services/sharedService";
 import { HttpClientModule } from '@angular/common/http';
@@ -14,10 +14,12 @@ export class AppComponent {
 
   public currentUser = {} as any;
   constructor(private router: Router, private sharedService: SharedService, private http: HttpClientModule,
-    private authenticationService: AuthenticationService) {
+    private authenticationService: AuthenticationService, private cdRef: ChangeDetectorRef) {
     this.getCurrentUser();
   }
-
+  ngAfterViewInit() {
+    this.cdRef.detectChanges();
+  }
   public getCurrentUser() {
     if (localStorage.getItem('currentUser')) {
       this.currentUser = localStorage.getItem('currentUser');
@@ -26,6 +28,7 @@ export class AppComponent {
 
   public logout() {
     this.authenticationService.logout();
-    this.router.navigate(['/']);
+    this.router.navigate(['']);
+    window.location.href = '/';
   }
 }

@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from "@angular/common/http";
 import { AuthenticationService } from 'src/app/Services/AuthenticationService';
 import { SharedService } from 'src/app/Services/sharedService';
+
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
@@ -42,11 +43,10 @@ export class LoginFormComponent implements OnInit {
             if (response.success) {
               let user = response.data;
               if (this.isAdmin(user)) {
-                this.router.navigate(['']);
-                window.location.href = '/dashboard';
+                this.router.navigate([this.returnUrl]);
               }
               this.sharedService.getCurrentUser();
-              window.location.href = this.returnUrl;
+              this.router.navigate([this.returnUrl]);
             }
           },
           error => {
