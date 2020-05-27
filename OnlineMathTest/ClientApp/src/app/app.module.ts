@@ -22,6 +22,7 @@ import { AdminModule } from './Modules/admin.module';
 import { StatisticModule } from './Modules/statistic.module';
 import { MCQModule } from './Modules/mcq.module';
 import { DashBoardModule } from './Modules/dashboard.module';
+
 @NgModule({
   declarations: [
     AppComponent,

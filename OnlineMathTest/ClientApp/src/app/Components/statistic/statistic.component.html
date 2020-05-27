@@ -46,7 +46,7 @@
             <td> {{i + 1}}</td>
             <td> {{item.mcqTitle}} </td>
             <td> {{item.point}} </td>
-            <td> {{item.createdOn}} </td>
+            <td> {{item.createOn | date: 'dd-MM-yyyy'}} </td>
             <td>
               <button class="btn btn-primary" (click)="viewDetail(item.id)"> Xem</button>
             </td>

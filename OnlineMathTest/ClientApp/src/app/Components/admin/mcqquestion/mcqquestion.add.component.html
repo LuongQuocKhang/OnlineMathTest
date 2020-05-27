@@ -8,11 +8,11 @@
           <li class="breadcrumb-item" aria-current="page"> Thêm mới </li>
         </ol>
       </nav>
-      <h4 class="mg-b-0 tx-spacing--1"> Ngân hàng câu hỏi </h4>
+      <h4 class="mg-b-0 tx-spacing--1"> Thông tin câu hỏi </h4>
     </div>
     <div class="d-none d-md-block">
       <a class="btn pd-x-15 btn-primary btn-uppercase mg-l-5"
-         href="javascript:;" (click)="addQuestion()" ><i data-feather="plus" class="wd-10 mg-r-5"></i> Lưu </a>
+         href="javascript:;" (click)="addQuestion()"><i data-feather="plus" class="wd-10 mg-r-5"></i> Lưu </a>
     </div>
   </div>
   <div class="row">
@@ -38,7 +38,11 @@
         </div>
         <div class="form-group">
           <label for="imageLink"> ImageLink </label>
-          <input class="form-control" type="text" name="imageLink" [(ngModel)]="question.imageLink" [ngModelOptions]="{standalone: true}" />
+          <a href="javascript:;" style="margin-left: 10px" (click)="fnOpenUpload()">
+             <i class="fa fa-upload"></i>
+          </a>
+          <input class="form-control" hidden type="file" name="file" id="pkFile" (change)="fileChange($event)" />
+          <input class="form-control" disabled type="text" name="imageLink" [(ngModel)]="question.imageLink" [ngModelOptions]="{standalone: true}" />
         </div>
 
         <div class="form-group">
@@ -51,7 +55,14 @@
             <option *ngFor="let q of levels" [ngValue]="q.id">{{q.levelName}}</option>
           </select>
         </div>
-
+        <div class="form-group">
+          <label class="form-control-label">
+            Latex
+          </label>
+          <textarea class="form-control" cols="10" id="editor1" name="editor1" rows="10" data-sample="1" data-sample-short [(ngModel)]="equation"></textarea>
+          <ng-katex [equation]="equation" [options]="options"></ng-katex>
+        </div>
+        <a href="https://katex.org/docs/supported.html#layout">Các ký tự toán học được hỗ trợ </a>
         <div class="form-group">
           <div class="panel">
             <div class="panel panel-heading">
@@ -63,7 +74,7 @@
                 <label for="" class="col-form-label">A</label>
                 <div class="col-sm-10">
                   <input type="text" [(ngModel)]="answer.A" [ngModelOptions]="{standalone: true}"
-                         class="form-control" >
+                         class="form-control">
                 </div>
               </div>
               <div class="row" style="margin-top: 10px;">

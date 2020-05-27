@@ -16,6 +16,7 @@ export class ExamComponent implements OnInit {
   public mcqId = 0 as any;
   public isEnd = false;
   public config = {} as any;
+  public isLoaded = false;
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute,
     private sharedService: SharedService) {
     this.sub = this.route.params.subscribe(params => {
@@ -25,12 +26,15 @@ export class ExamComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.config = { leftTime: this.model.duration * 60 };
+    
   }
   public getMCQById() {
+    this.isLoaded = false;
     this.http.get('/MCQ/GetMCQById?id=' + this.mcqId).subscribe(
       (response: any) => {
         this.model = response.data;
+        this.config = { leftTime: this.model.duration * 60 };
+        this.isLoaded = true;
       })
   }
   ngAfterViewInt() {

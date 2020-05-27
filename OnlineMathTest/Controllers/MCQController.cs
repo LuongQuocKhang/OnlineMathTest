@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineMathTest.Common;
@@ -15,11 +18,14 @@ namespace OnlineMathTest.Controllers
         private readonly IMCQService _mcqService;
         private readonly IUserService _userService;
         private readonly UserManager<IdentityUser> _userManager;
-        public MCQController(IMCQService mcqService, IUserService userService, UserManager<IdentityUser> userManager)
+        private readonly IHostingEnvironment _env;
+        public MCQController(IMCQService mcqService, IUserService userService, UserManager<IdentityUser> userManager,
+            IHostingEnvironment env)
         {
             _mcqService = mcqService;
             _userService = userService;
             _userManager = userManager;
+            _env = env;
         }
         public IActionResult Index()
         {
@@ -41,7 +47,7 @@ namespace OnlineMathTest.Controllers
             return Json(response);
         }
         [HttpPost]
-        public IActionResult Search(SearchViewModel searchQuery)
+        public IActionResult Search([FromBody]SearchViewModel searchQuery)
         {
             ResponseViewModel response = new ResponseViewModel();
             try
@@ -158,6 +164,32 @@ namespace OnlineMathTest.Controllers
             {
                 response.success = true;
                 response.data = _mcqService.GetUsetTest(userTestId);
+            }
+            catch (Exception ex)
+            {
+                response.success = false;
+                response.errMsg = ex.ToString();
+            }
+            return Json(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> FileUpload()
+        {
+            ResponseViewModel response = new ResponseViewModel();
+            try
+            {
+                var file = Request.Form.Files[0];
+                var path = Path.Combine(
+                  Directory.GetCurrentDirectory(), "wwwroot",
+                  file.FileName);
+               
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+                response.success = true;
+                response.data = file.FileName;
             }
             catch (Exception ex)
             {

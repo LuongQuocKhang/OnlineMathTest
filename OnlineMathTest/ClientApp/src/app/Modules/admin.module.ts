@@ -12,7 +12,7 @@ import { EditMcqManagementComponent } from '../Components/admin/mcqmanagement/mc
 import { AddMcqQuestionComponent } from '../Components/admin/mcqquestion/mcqquestion.add.component';
 import { EditMcqQuestionComponent } from '../Components/admin/mcqquestion/mcqquestion.edit.component';
 import { EditUserManagementComponent } from '../Components/admin/user/usermanagement.edit.component';
-
+import { KatexModule } from 'ng-katex';
 @NgModule({
   declarations: [
     McqManagementComponent,
@@ -36,6 +36,7 @@ import { EditUserManagementComponent } from '../Components/admin/user/usermanage
       { path: 'adminpage/usermanagement', component: UserManagementComponent, canActivate: [AdminAuthGuardService] },
       { path: 'adminpage/usermanagement/edit/:id', component: EditUserManagementComponent, canActivate: [AdminAuthGuardService] },
     ]),
+    KatexModule
   ],
   providers: [
     AdminAuthGuardService

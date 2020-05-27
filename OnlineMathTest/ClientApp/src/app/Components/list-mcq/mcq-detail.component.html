@@ -1,19 +1,17 @@
 <div class="pricing-container margin-0">
   <header class="pricing-header">
-    <h2> THI THỬ 2018 – CHUYÊN LÊ QUÝ ĐÔN – ĐIỆN BIÊN (LẦN 2) </h2>
+    <h2> {{model.title}} </h2>
   </header>
   <div class="info">
-    <span> <i class="fa fa-clock-o" aria-hidden="true"></i> Ngày cập nhật :  {{model.createOn | date: 'dd/MM/yyy' }} </span>
-    <span style="margin-left: 10px;"> <i class="fa fa-eye" aria-hidden="true"></i>  {{model.views}} Lượt xem </span>
+    <span>  Ngày cập nhật :  {{model.createOn | date: 'dd/MM/yyy' }} </span>
+    <span style="margin-left: 10px;">   {{model.views}} Lượt xem </span>
   </div>
 
   <div style="padding-top: 10px;" class="TestContent">
     <div class="tg">
       <b>
-        <i class="fa fa-clock-o" aria-hidden="true">
-        </i> {{model.duration}} phút &nbsp;&nbsp;&nbsp;
-        <i class="fa fa-list-alt" aria-hidden="true">
-        </i> {{model.numberOdQuestions}} câu
+        {{model.duration}} phút &nbsp;&nbsp;&nbsp;
+        {{model.numberOfQuestion}} câu
       </b>
       <p>Hình thức thi: Trắc nghiệm</p>
     </div>
@@ -21,8 +19,11 @@
       <a style="float: none;"
          class="takeExam"
          href="javascript:;"
-         (click)="takeExam()">Bắt đầu vào thi thử <i class="fa fa-arrow-right" aria-hidden="true"></i></a> &nbsp;&nbsp;
-      <p style="padding-top: 12px;">Hãy <a [routerLink]="['/register']">Đăng ký</a> hoặc <a [routerLink]="['/Login']">Đăng nhập</a> để vào thi</p>
+         (click)="takeExam()">Bắt đầu vào thi </a> &nbsp;&nbsp;
+      <div *ngIf="sharedService.currentUser == null">
+        <p style="padding-top: 12px;">Hãy <a [routerLink]="['/register']">Đăng ký</a> hoặc <a [routerLink]="['/Login']">Đăng nhập</a> để vào thi</p>
+
+      </div>
     </div>
     <div class="clr"></div>
   </div>

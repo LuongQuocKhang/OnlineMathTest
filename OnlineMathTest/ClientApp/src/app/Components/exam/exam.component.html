@@ -17,7 +17,7 @@
           </p>
 
           <div style="display: contents;" >
-            <div class="Answer-image" *ngFor='let answer of question.answers'>
+            <div class="Answer-image form-group" *ngFor='let answer of question.answers'>
               <input type="radio"
                      id="{{answer.id}}"
                      [(ngModel)]="question.selectedValue" [ngModelOptions]="{standalone: true}"
@@ -36,6 +36,7 @@
         <div class="vk-time">
           <h3 class="vk-time__title">Thời gian làm bài</h3>
           <countdown #cd
+                     *ngIf="isLoaded"
                      style="font-size: 30px;color: red;"
                      [config]="config"
                      (event)="handleEvent($event)"></countdown>

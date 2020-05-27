@@ -22,6 +22,7 @@ namespace OnlineMathTest.Services
 
         public bool AddMCQ(MCQViewModel mcq)
         {
+            if (mcq == null) return false;
             var _mcq = new Mcq();
             _mapper.Map(mcq, _mcq);
             _mcq.CreateOn = DateTime.Now;
@@ -45,6 +46,8 @@ namespace OnlineMathTest.Services
         {
             var _mcq = _unitOfWork.Repository<Mcq>().FirstOrDefault(x => x.Id == mcq.Id);
             _mcq.IsDeleted = true;
+            var _mcqQuestion = _unitOfWork.Repository<Mcqquestion>().Where(x => x.McqquestionId == _mcq.Id);
+            _unitOfWork.Repository<Mcqquestion>().RemoveRange(_mcqQuestion);
             _unitOfWork.SaveChanges();
             return true;
         }
@@ -66,7 +69,7 @@ namespace OnlineMathTest.Services
         public List<MCQViewModel> GetAllMCQ(SearchViewModel searchQuery)
         {
             var mcq = _unitOfWork.Repository<Mcq>().Where(x => !x.IsDeleted.Value 
-            && RemoveUnicode.RemoveSign4VietnameseString(x.Title).Contains(searchQuery.Key))
+            && RemoveUnicode.RemoveSign4VietnameseString(x.Title).ToLower().Contains(RemoveUnicode.RemoveSign4VietnameseString(searchQuery.Key).ToLower()))
                 .OrderBy(x => x.CreateOn);
             var mcqvm = _mapper.Map<List<MCQViewModel>>(mcq.ToList());
             return mcqvm;

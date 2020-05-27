@@ -31,11 +31,14 @@ namespace OnlineMathTest.Services
                     question.ImageLink = "/images/" + question.ImageLink;
                 }
                 _unitOfWork.SaveChanges();
+                var displayNumber = 1;
                 foreach (var answervm in questionvm.Answers)
                 {
                     var answer = _mapper.Map<QuestionAnswer>(answervm);
                     answer.QuestionId = question.Id;
+                    answer.DisplayNumber = displayNumber;
                     _unitOfWork.Repository<QuestionAnswer>().Add(answer);
+                    displayNumber++;
                 }
                 _unitOfWork.SaveChanges();
                 return true;
@@ -46,6 +49,11 @@ namespace OnlineMathTest.Services
         public bool DeleteQuestion(QuestionViewModel questionvm)
         {
             var question = _unitOfWork.Repository<Question>().FirstOrDefault(x => x.Id == questionvm.Id);
+            var check = _unitOfWork.Repository<Mcqquestion>().FirstOrDefault(x => x.QuestionId == question.Id);
+            if ( check != null)
+            {
+                return false;
+            }
             question.IsDeleted = true;
             _unitOfWork.SaveChanges();
             return true;
