@@ -25,7 +25,7 @@
     "angular-4-data-table-bootstrap-4": "^0.2.0",
     "angular2-datatable": "^0.6.0",
     "bootstrap": "^4.4.1",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "datatables.net": "^1.10.20",
     "datatables.net-bs4": "^1.10.19",
     "jquery": "^3.4.1",
